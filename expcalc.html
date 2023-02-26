@@ -73,15 +73,17 @@
   </head>
   <body>
     <h1>Blue Archive Sensei Exp Calculator</h1>
-	<h2>by Futotto-kakka</h2>
+	<h2>by Futotta-kakka</h2>
 	<h3><a href="https://github.com/aizawey479/ba-data"> EXP Data Source </a> | <a href=""> EXP Calc Source </a></h3>
     <form>
       <label for="currentLevel">Current Level:</label>
-      <input type="number" id="currentLevel" name="currentLevel" min="1" max="84"><br><br>
+      <input type="number" id="currentLevel" name="currentLevel" min="1" max="84" value="1"><br><br>
+	  <label for="currentLevelExp">Current EXP in Level:</label>
+      <input type="number" id="currentLevelExp" name="currentLevelExp" min="0" max="9459" value="0"><br><br>
       <label for="targetLevel">Target Level (max 85JP/80GLB):</label>
-      <input type="number" id="targetLevel" name="targetLevel" max="85" min="2"><br><br>
+      <input type="number" id="targetLevel" name="targetLevel" max="85" min="2" value="85"><br><br>
 	  <label for="expPerDay">Expected Exp/AP Spent per day:</label>
-	  <input type="number" id="expPerDay" name="expPerDay"><br><br>
+	  <input type="number" id="expPerDay" name="expPerDay" min="0" max="9999" value="1"><br><br>
       <input type="button" value="Calculate" onclick="calculateXP()">
     </form>
     <p id="expNeeded"></p>
@@ -178,9 +180,10 @@
       function calculateXP() {
         var currentLevel = parseInt(document.getElementById("currentLevel").value);
         var targetLevel = parseInt(document.getElementById("targetLevel").value);
+		var currentLevelExp = parseInt(document.getElementById("currentLevelExp").value);
         
-        if (isNaN(currentLevel) || isNaN(targetLevel)) {
-          alert("Please enter valid numbers for current level and target level.");
+        if (isNaN(currentLevel) || isNaN(targetLevel) || isNaN(currentLevelExp))  {
+          alert("Please enter valid numbers for all fields.");
           return;
         }
         
@@ -199,10 +202,11 @@
 		
 		var expPerDay = parseInt(document.getElementById("expPerDay").value);
 
-		var totalEXPNeeded = expNeeded;
+		var totalEXPNeeded = expNeeded - currentLevelExp;
 		var daysNeeded = Math.ceil((totalEXPNeeded / expPerDay));
+		var monthsNeeded = Math.ceil((daysNeeded / 30.44));
 
-		document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days.";
+		document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days (~"+ monthsNeeded + " months).";
 
 		
       }
