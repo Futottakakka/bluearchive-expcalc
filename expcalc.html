@@ -64,7 +64,7 @@
         background-color: #ddd;
       }
       
-      #xpNeeded {
+      #expNeeded {
         font-size: 1.5em;
         margin: 1em;
         text-align: center;
@@ -77,14 +77,14 @@
 	<h3><a href="https://github.com/aizawey479/ba-data"> EXP Data Source </a> | <a href=""> EXP Calc Source </a></h3>
     <form>
       <label for="currentLevel">Current Level:</label>
-      <input type="number" id="currentLevel" name="currentLevel"><br><br>
-      <label for="targetLevel">Target Level:</label>
-      <input type="number" id="targetLevel" name="targetLevel"><br><br>
-	  <label for="expPerDay">Expected XP gain per day:</label>
+      <input type="number" id="currentLevel" name="currentLevel" min="1" max="84"><br><br>
+      <label for="targetLevel">Target Level (max 85JP/80GLB):</label>
+      <input type="number" id="targetLevel" name="targetLevel" max="85" min="2"><br><br>
+	  <label for="expPerDay">Expected Exp/AP Spent per day:</label>
 	  <input type="number" id="expPerDay" name="expPerDay"><br><br>
       <input type="button" value="Calculate" onclick="calculateXP()">
     </form>
-    <p id="xpNeeded"></p>
+    <p id="expNeeded"></p>
     <script>
       var levelData = [
     {"level": 1, "exp": 8},
@@ -189,20 +189,20 @@
           return;
         }
         
-        var xpNeeded = 0;
+        var expNeeded = 0;
         
         for (var i = currentLevel - 1; i < targetLevel - 1; i++) {
-          xpNeeded += levelData[i].exp;
+          expNeeded += levelData[i].exp;
         }
         
-        document.getElementById("xpNeeded").innerHTML = "XP needed: " + xpNeeded;
+        document.getElementById("expNeeded").innerHTML = "XP needed: " + expNeeded;
 		
 		var expPerDay = parseInt(document.getElementById("expPerDay").value);
 
-		var totalEXPNeeded = xpNeeded;
+		var totalEXPNeeded = expNeeded;
 		var daysNeeded = Math.ceil((totalEXPNeeded / expPerDay));
 
-		document.getElementById("xpNeeded").innerHTML = "XP needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days.";
+		document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days.";
 
 		
       }
