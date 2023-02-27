@@ -112,8 +112,18 @@
 	  <input type="number" id="expPerDay" name="expPerDay" min="0" max="9999" value="1"><br><br>
       <input type="button" value="Calculate" onclick="calculateXP()"></br>
 	  <p id="expNeeded"></p> </br>
+	  <p> You receive: 
+		<ul>
+			<li>150 AP Daily from Missions</li>
+			<li>350 AP Weekly from Missions</li>
+			<li>240 AP Regen Per Day</li>
+			<li>10 AP Club Bonus</li>
+			<li>Bonus AP Per Level Up (Depends on level)
+			<li>You can buy 360AP with TC Coins per day (90*4 refreshes)</li>
+			<li> You can use Pyro for 120 AP per purchase(see table below)</li>
+		</ul></p>
 	<h3>Cafe AP Value table</h3>
-	<h4>I do not know how AP/Hr is calculated and the data isn't presented. </br> I took my current max AP at rank 6 (460) and divided it by AP/hr at rank 6 (19.49/hr).</br> This gave me <b>23.60184710107748 hrs per Max AP Fill</b>. I then used as the constant for a ROUGH EstimatedActionPointsPerHour for the other ranks.</h4>
+	<h4>I do not know how AP/Hr is calculated and the data isn't presented. </br> I took my current max AP at rank 6 (460) and divided it by AP/hr at rank 6 (19.49/hr).</br> This gave me <b>23.60184710107748 hrs per Max AP Fill</b>. I then used as the constant for a ROUGH EstimatedActionPointsPerHour for the other ranks.</h4> </br>
 	<table>
 	  <thead>
 		<tr>
@@ -175,6 +185,114 @@
 		</tr>
 	  </tbody>
 	</table>
+		<h3> Pyro AP Refresh Table </h3>
+		<table>
+		  <tr>
+			<th>AP Refill</th>
+			<th>Price</th>
+			<th>Cumulative Price</th>
+		  </tr>
+		  <tr>
+			<td>1</td>
+			<td>30</td>
+			<td>30</td>
+		  </tr>
+		  <tr>
+			<td>2</td>
+			<td>30</td>
+			<td>60</td>
+		  </tr>
+		  <tr>
+			<td>3</td>
+			<td>30</td>
+			<td>90</td>
+		  </tr>
+		  <tr>
+			<td>4</td>
+			<td>60</td>
+			<td>150</td>
+		  </tr>
+		  <tr>
+			<td>5</td>
+			<td>60</td>
+			<td>210</td>
+		  </tr>
+		  <tr>
+			<td>6</td>
+			<td>60</td>
+			<td>270</td>
+		  </tr>
+		  <tr>
+			<td>7</td>
+			<td>100</td>
+			<td>370</td>
+		  </tr>
+		  <tr>
+			<td>8</td>
+			<td>100</td>
+			<td>470</td>
+		  </tr>
+		  <tr>
+			<td>9</td>
+			<td>100</td>
+			<td>570</td>
+		  </tr>
+		  <tr>
+			<td>10</td>
+			<td>150</td>
+			<td>720</td>
+		  </tr>
+		  <tr>
+			<td>11</td>
+			<td>150</td>
+			<td>870</td>
+		  </tr>
+		  <tr>
+			<td>12</td>
+			<td>150</td>
+			<td>1020</td>
+		  </tr>
+		  <tr>
+			<td>13</td>
+			<td>200</td>
+			<td>1220</td>
+		  </tr>
+		  <tr>
+			<td>14</td>
+			<td>200</td>
+			<td>1420</td>
+		  </tr>
+		  <tr>
+			<td>15</td>
+			<td>200</td>
+			<td>1620</td>
+		  </tr>
+		  <tr>
+			<td>16</td>
+			<td>300</td>
+			<td>1920</td>
+		  </tr>
+		  <tr>
+			<td>17</td>
+			<td>300</td>
+			<td>2220</td>
+		  </tr>
+		  <tr>
+			<td>18</td>
+			<td>300</td>
+			<td>2520</td>
+		  </tr>
+		  <tr>
+			<td>19</td>
+			<td>300</td>
+			<td>2820</td>
+		  </tr>
+		  <tr>
+			<td>20</td>
+			<td>300</td>
+			<td>3120</td>
+		  </tr>
+		</table>
     </form>
     <script>
       var levelData = [
@@ -264,40 +382,32 @@
     {"level": 84, "exp": 8883},
     {"level": 85, "exp": 9460}
   ];
-
-      
-      function calculateXP() {
-        var currentLevel = parseInt(document.getElementById("currentLevel").value);
-        var targetLevel = parseInt(document.getElementById("targetLevel").value);
+    function calculateXP() {
+		var currentLevel = parseInt(document.getElementById("currentLevel").value);
+		var targetLevel = parseInt(document.getElementById("targetLevel").value);
 		var currentLevelExp = parseInt(document.getElementById("currentLevelExp").value);
-        
-        if (isNaN(currentLevel) || isNaN(targetLevel) || isNaN(currentLevelExp))  {
-          alert("Please enter valid numbers for all fields.");
-          return;
-        }
-        
-        if (targetLevel <= currentLevel) {
-          alert("Target level must be greater than current level.");
-          return;
-        }
-        
-        var expNeeded = 0;
-        
-        for (var i = currentLevel - 1; i < targetLevel - 1; i++) {
-          expNeeded += levelData[i].exp;
-        }
-        
-        document.getElementById("expNeeded").innerHTML = "XP needed: " + expNeeded;
-		
-		var expPerDay = parseInt(document.getElementById("expPerDay").value);
+	
+		if (isNaN(currentLevel) || isNaN(targetLevel) || isNaN(currentLevelExp))  {
+			alert("Please enter valid numbers for all fields.");
+			return;
+		}
+	
+		if (targetLevel <= currentLevel) {
+			alert("Target level must be greater than current level.");
+			return;
+		}
+		var expNeeded = 0;
+		for (var i = currentLevel - 1; i < targetLevel - 1; i++) {
+		expNeeded += levelData[i].exp;
+	}
+	document.getElementById("expNeeded").innerHTML = "XP needed: " + expNeeded;
 
-		var totalEXPNeeded = expNeeded - currentLevelExp;
-		var daysNeeded = Math.ceil((totalEXPNeeded / expPerDay));
-		var monthsNeeded = Math.ceil((daysNeeded / 30.44));
+	var expPerDay = parseInt(document.getElementById("expPerDay").value);
+	var totalEXPNeeded = expNeeded - currentLevelExp;
+	var daysNeeded = Math.ceil((totalEXPNeeded / expPerDay));
+	var monthsNeeded = Math.ceil((daysNeeded / 30.44));
 
-		document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days (~"+ monthsNeeded + " months).";
-
-		
+	document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days (~"+ monthsNeeded + " months).";
       }
     </script>
   </body>
