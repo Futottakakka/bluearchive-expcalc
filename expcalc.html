@@ -110,7 +110,8 @@
       <input type="number" id="targetLevel" name="targetLevel" max="85" min="2" value="85"><br><br>
 	  <label for="expPerDay">Expected Exp/AP Spent per day:</label>
 	  <input type="number" id="expPerDay" name="expPerDay" min="0" max="9999" value="1"><br><br>
-      <input type="button" value="Calculate" onclick="calculateXP()">
+      <input type="button" value="Calculate" onclick="calculateXP()"></br>
+	  <p id="expNeeded"></p> </br>
 	<h3>Cafe AP Value table</h3>
 	<h4>I do not know how AP/Hr is calculated and the data isn't presented. </br> I took my current max AP at rank 6 (460) and divided it by AP/hr at rank 6 (19.49/hr).</br> This gave me <b>23.60184710107748 hrs per Max AP Fill</b>. I then used as the constant for a ROUGH EstimatedActionPointsPerHour for the other ranks.</h4>
 	<table>
@@ -175,7 +176,6 @@
 	  </tbody>
 	</table>
     </form>
-    <p id="expNeeded"></p>
     <script>
       var levelData = [
     {"level": 1, "exp": 8},
