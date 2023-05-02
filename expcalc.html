@@ -130,6 +130,38 @@
 		  <option value="670">9</option>
 		  <option value="740">10</option>
 		</select><br><br>
+		<label for="numApRefreshes">Number of AP Refreshes (Per Day):</label>
+		<select id="numApRefreshes" name="numApRefreshes" onchange="updateExpPerDay()">
+		  <option value="0">0</option>
+		  <option value="120">1</option>
+		  <option value="240">2</option>
+		  <option value="360">3</option>
+		  <option value="480">4</option>
+		  <option value="600">5</option>
+		  <option value="720">6</option>
+		  <option value="840">7</option>
+		  <option value="960">8</option>
+		  <option value="1080">9</option>
+		  <option value="1200">10</option>
+		  <option value="1320">11</option>
+		  <option value="1440">12</option>
+		  <option value="1560">13</option>
+		  <option value="1680">14</option>
+		  <option value="1800">15</option>
+		  <option value="1920">16</option>
+		  <option value="2040">17</option>
+		  <option value="2160">18</option>
+		  <option value="2280">19</option>
+		  <option value="2400">20</option>
+		</select><br><br>
+		<label for="TCCoinAP">Number of TC Coin Purchases (15 TC Coin(30AP)+30TC Coin(60AP)= 90AP per refresh, max 4 per day):</label>
+		<select id="TCCoinAP" name="TCCoinAP" onchange="updateExpPerDay()">
+		  <option value="0">0</option>
+		  <option value="90">1</option>
+		  <option value="180">2</option>
+		  <option value="270">3</option>
+		  <option value="360">4</option>
+		</select><br><br>
 	  <label for="expPerDay">Expected Exp/AP Spent per day:</label>
 	  <input type="number" id="expPerDay" name="expPerDay" min="0" max="9999" value="1">
 	  <p id="calculationDetails"></p>
@@ -149,203 +181,141 @@
 		</ul>
 		Daily average (without cafe)<b>450AP</b></br>
 		<i>(daily mission) + (weekly/7) + (daily recharge) + (club bonus) = 150+(350/7)+240+10 = 450 AP/Day</i> </br>
-		+ 410AP from Cafe Bonus (avg max cafe accross ranks 1-10) = <b>860 AP/Day</b></br>
-		+ 4x TC Purchases (360AP) OR 3x Pyro (360AP) = <b>1220 AP/Day</b> </br>
-		+ 4x TC Purchases AND 3x Pyro Refresh (360*2) = <b>1580 AP/Day</b></br>
+		+ 4x TC Purchases (360AP) OR 3x Pyro (360AP) = <b>810 AP/Day</b> </br>
+		+ 4x TC Purchases AND 3x Pyro Refresh (360*2) = <b>1170 AP/Day</b></br>
+		+ Cafe Bonus (select current Cafe Level from dropdown, current max is 7 for GLB+JP)</b></br>
+		Please note that this will only provide a rough esitmate, as it does not include bonus XP from events/gifts and it doesn't include the AP refresh that occurs upon leveling up. I'd +/- 5-10 days from the estimate. 
 		</p>
-	<h3 id="cafe-ap-table">Cafe AP Value table</h3>
-	<h4>I do not know how AP/Hr is calculated and the data isn't presented. </br> I took my current max AP at rank 6 (460) and divided it by AP/hr at rank 6 (19.49/hr).</br> This gave me <b>23.60184710107748 hrs per Max AP Fill</b>. I then used as the constant for a ROUGH EstimatedActionPointsPerHour for the other ranks.</h4> </br>
-	<table>
-	  <thead>
-		<tr>
-		  <th>Cafe Rank</th>
-		  <th>ActionPointStorageMax</th>
-		  <th>EstimatedActionPointsPerHour</th>
-		</tr>
-	  </thead>
-	  <tbody>
-		<tr>
-		  <td>1</td>
-		  <td>90</td>
-		  <td>3.8178342783568896</td>
-		</tr>
-		<tr>
-		  <td>2</td>
-		  <td>150</td>
-		  <td>6.353057130594816</td>
-		</tr>
-		<tr>
-		  <td>3</td>
-		  <td>220</td>
-		  <td>9.310344827586206</td>
-		</tr>
-		<tr>
-		  <td>4</td>
-		  <td>300</td>
-		  <td>12.716763005780347</td>
-		</tr>
-		<tr>
-		  <td>5</td>
-		  <td>390</td>
-		  <td>16.50563360402685</td>
-		</tr>
-		<tr>
-		  <td>6</td>
-		  <td>460</td>
-		  <td>19.483172782227786</td>
-		</tr>
-		<tr>
-		  <td>7</td>
-		  <td>530</td>
-		  <td>22.46071196042872</td>
-		</tr>
-		<tr>
-		  <td>8</td>
-		  <td>600</td>
-		  <td>25.438251138629655</td>
-		</tr>
-		<tr>
-		  <td>9</td>
-		  <td>670</td>
-		  <td>28.41579031683059</td>
-		</tr>
-		<tr>
-		  <td>10</td>
-		  <td>740</td>
-		  <td>31.393329495031525</td>
-		</tr>
-	  </tbody>
-	</table>
-	<h3 id="pyro-ap-table"> Pyro AP Refresh Table </h3>
-	<table>
-	  <thead>
-		  <tr>
-		    <th>Refill</th>
-		    <th>Price</th>
-		    <th>Cumulative Price</th>
-		    <th>Cumulative AP Gained</th>
-		  </tr>
-		</thead>
+		<h3 id="pyro-ap-table"> Pyro AP Refresh Table </h3>
+		<table>
+	<thead>
+	  <tr>
+		<th>Refill</th>
+		<th>Price</th>
+		<th>Cumulative Price</th>
+		<th>Cumulative AP Gained</th>
+	  </tr>
+	</thead>
 		<tbody>
 		  <tr>
-		    <td>1</td>
-		    <td>30</td>
-		    <td>30</td>
-		    <td>120</td>
+			<td>1</td>
+			<td>30</td>
+			<td>30</td>
+			<td>120</td>
 		  </tr>
 		  <tr>
-		    <td>2</td>
-		    <td>30</td>
-		    <td>60</td>
-		    <td>240</td>
+			<td>2</td>
+			<td>30</td>
+			<td>60</td>
+			<td>240</td>
 		  </tr>
 		  <tr>
-		    <td>3</td>
-		    <td>30</td>
-		    <td>90</td>
-		    <td>360</td>
+			<td>3</td>
+			<td>30</td>
+			<td>90</td>
+			<td>360</td>
 		  </tr>
 		  <tr>
-		    <td>4</td>
-		    <td>60</td>
-		    <td>150</td>
-		    <td>480</td>
+			<td>4</td>
+			<td>60</td>
+			<td>150</td>
+			<td>480</td>
 		  </tr>
 		  <tr>
-		    <td>5</td>
-		    <td>60</td>
-		    <td>210</td>
-		    <td>600</td>
+			<td>5</td>
+			<td>60</td>
+			<td>210</td>
+			<td>600</td>
 		  </tr>
 		  <tr>
-		    <td>6</td>
-		    <td>60</td>
-		    <td>270</td>
-		    <td>720</td>
+			<td>6</td>
+			<td>60</td>
+			<td>270</td>
+			<td>720</td>
 		  </tr>
 		  <tr>
-		    <td>7</td>
-		    <td>100</td>
-		    <td>370</td>
-		    <td>840</td>
+			<td>7</td>
+			<td>100</td>
+			<td>370</td>
+			<td>840</td>
 		  </tr>
 		  <tr>
-		    <td>8</td>
-		    <td>100</td>
-		    <td>470</td>
-		    <td>960</td>
+			<td>8</td>
+			<td>100</td>
+			<td>470</td>
+			<td>960</td>
 		  </tr>
 		  <tr>
-		    <td>9</td>
-		    <td>100</td>
-		    <td>570</td>
-		    <td>1080</td>
+			<td>9</td>
+			<td>100</td>
+			<td>570</td>
+			<td>1080</td>
 		  </tr>
 		  <tr>
-		    <td>10</td>
-		    <td>150</td>
-		    <td>720</td>
-		    <td>1200</td>
+			<td>10</td>
+			<td>150</td>
+			<td>720</td>
+			<td>1200</td>
 		  </tr>
 		  <tr>
-		    <td>11</td>
-		    <td>150</td>
-		    <td>870</td>
-		    <td>1320</td>
+			<td>11</td>
+			<td>150</td>
+			<td>870</td>
+			<td>1320</td>
 		  </tr>
 		  <tr>
-		    <td>12</td>
-		    <td>150</td>
-		    <td>1020</td>
-		    <td>1440</td>
+			<td>12</td>
+			<td>150</td>
+			<td>1020</td>
+			<td>1440</td>
 		  </tr>
 		  <tr>
-		    <td>13</td>
-		    <td>200</td>
-		    <td>1220</td>
-		    <td>1560</td>
+			<td>13</td>
+			<td>200</td>
+			<td>1220</td>
+			<td>1560</td>
 		  </tr>
 		  <tr>
-		    <td>14</td>
-		    <td>200</td>
-		    <td>1420</td>
-		    <td>1680</td>
+			<td>14</td>
+			<td>200</td>
+			<td>1420</td>
+			<td>1680</td>
 		  </tr>
 		  <tr>
-		    <td>15</td>
-		    <td>200</td>
-		    <td>1620</td>
-		    <td>1800</td>
+			<td>15</td>
+			<td>200</td>
+			<td>1620</td>
+			<td>1800</td>
 		  </tr>
 		  <tr>
-		    <td>16</td>
-		    <td>300</td>
-		    <td>1920</td>
-		    <td>1920</td>
+			<td>16</td>
+			<td>300</td>
+			<td>1920</td>
+			<td>1920</td>
 		  </tr>
 		  <tr>
-		    <td>17</td>
-		    <td>300</td>
-		    <td>2220</td>
-		    <td>2040</td>
+			<td>17</td>
+			<td>300</td>
+			<td>2220</td>
+			<td>2040</td>
 		  </tr>
 		  <tr>
-		    <td>18</td>
-		    <td>300</td>
-		    <td>2520</td>
-		    <td>2160</td>
+			<td>18</td>
+			<td>300</td>
+			<td>2520</td>
+			<td>2160</td>
 		  </tr>
 		  <tr>
-		    <td>19</td>
-		    <td>300</td>
-		    <td>2820</td>
-		    <td>2280</td>
+			<td>19</td>
+			<td>300</td>
+			<td>2820</td>
+			<td>2280</td>
 		  </tr>
 		  <tr>
-		    <td>20</td>
-		    <td>300</td>
-		    <td>3120</td>
-		    <td>2400</td>
+			<td>20</td>
+			<td>300</td>
+			<td>3120</td>
+			<td>2400</td>
 		  </tr>
 		</tbody>
 	</table>
@@ -467,21 +437,26 @@
       }
 	function updateExpPerDay() {
 	  const cafeRankSelect = document.getElementById("cafeRank");
+	  const apRefreshSelect = document.getElementById("numApRefreshes");
 	  const expPerDayInput = document.getElementById("expPerDay");
 	  const baseExpPerDay = 450; // Set the base value to 450 (Daily average without cafe)
 	  const selectedCafeRankAP = parseInt(cafeRankSelect.value);
-	  const updatedExpPerDay = baseExpPerDay + selectedCafeRankAP;
+	  const selectedTCCoinPurchases = parseInt(TCCoinAP.value);
+	  const selectedPyroRefreshAP = parseInt(numApRefreshes.value);
+	  const updatedExpPerDay = baseExpPerDay + selectedCafeRankAP + selectedPyroRefreshAP;
 
 	  expPerDayInput.value = updatedExpPerDay;
 }
 	function displayCalculationDetails() {
 	  const cafeBonus = parseInt(document.getElementById('cafeRank').value);
+	  const TCCoinAPBonus = parseInt(document.getElementById('TCCoinAP').value);
+	  const pyroRefresh = parseInt(document.getElementById('numApRefreshes').value);
 	  const dailyAmount = 450;
-	  const details = `Cafe Bonus: ${cafeBonus} + Daily Amount: ${dailyAmount} = ${cafeBonus + dailyAmount}`;
+	  const details = `Cafe Bonus: ${cafeBonus} + Daily Amount: ${dailyAmount} + Pyro Refresh AP: ${pyroRefresh} + TC Coin Purchases: ${TCCoinAPBonus}  = ${cafeBonus + dailyAmount + pyroRefresh + TCCoinAPBonus}`;
 	  document.getElementById('calculationDetails').innerText = details;
 	}
 	function updateExpPerDay() {
-  document.getElementById('expPerDay').value = parseInt(document.getElementById('cafeRank').value) + 450;
+  document.getElementById('expPerDay').value = parseInt(document.getElementById('cafeRank').value) + 450 + parseInt(document.getElementById('numApRefreshes').value) + parseInt(document.getElementById('TCCoinAP').value);
   displayCalculationDetails();
 	}
 window.addEventListener('load', () => {
