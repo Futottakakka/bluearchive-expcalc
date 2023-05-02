@@ -116,7 +116,7 @@
 	  <label for="currentLevelExp">Current EXP in Level:</label>
       <input type="number" id="currentLevelExp" name="currentLevelExp" min="0" max="9459" value="0"><br><br>
       <label for="targetLevel">Target Level (max 85JP/83GLB):</label>
-      <input type="number" id="targetLevel" name="targetLevel" max="85" min="2" value="83"><br><br>
+      <input type="number" id="targetLevel" name="targetLevel" max="85" min="2" value="85"><br><br>
 	  <label for="cafeRank">Cafe Rank:</label>
 		<select id="cafeRank" name="cafeRank" onchange="updateExpPerDay()">
 		  <option value="90">1</option>
@@ -130,30 +130,6 @@
 		  <option value="670">9</option>
 		  <option value="740">10</option>
 		</select><br><br>
-		 <label for="pyroRefreshes">Pyro Refreshes:</label>
-      <select id="pyroRefreshes" name="pyroRefreshes" onchange="updateExpPerDay()">
-        <option value="0">0</option>
-        <option value="30">1</option>
-        <option value="60">2</option>
-        <option value="90">3</option>
-        <option value="150">4</option>
-        <option value="210">5</option>
-        <option value="270">6</option>
-        <option value="370">7</option>
-        <option value="470">8</option>
-        <option value="570">9</option>
-        <option value="720">10</option>
-        <option value="870">11</option>
-        <option value="1020">12</option>
-        <option value="1220">13</option>
-        <option value="1420">14</option>
-        <option value="1620">15</option>
-        <option value="1920">16</option>
-        <option value="2220">17</option>
-        <option value="2520">18</option>
-        <option value="2820">19</option>
-        <option value="3120">20</option>
-      </select><br><br>
 	  <label for="expPerDay">Expected Exp/AP Spent per day:</label>
 	  <input type="number" id="expPerDay" name="expPerDay" min="0" max="9999" value="1">
 	  <p id="calculationDetails"></p>
@@ -479,12 +455,10 @@
 	  const details = `Cafe Bonus: ${cafeBonus} + Daily Amount: ${dailyAmount} = ${cafeBonus + dailyAmount}`;
 	  document.getElementById('calculationDetails').innerText = details;
 	}
-    function updateExpPerDay() {
-      const cafeRank = document.getElementById('cafeRank').value;
-      const pyroRefreshes = document.getElementById('pyroRefreshes').value;
-      const expPerDay = parseInt(cafeRank) + parseInt(pyroRefreshes);
-      document.getElementById('expPerDay').value = expPerDay;
-    }
+	function updateExpPerDay() {
+  document.getElementById('expPerDay').value = parseInt(document.getElementById('cafeRank').value) + 450;
+  displayCalculationDetails();
+	}
 window.addEventListener('load', () => {
   displayCalculationDetails();
 });
