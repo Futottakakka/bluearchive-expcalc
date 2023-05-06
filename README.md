@@ -1,4 +1,4 @@
-# Blue Archive Exp Calculator + Esimator
+# Blue Archive Exp Calculator + Estimator
 
 Calculates how much XP you need to get from level X to level Y and, depending on input Exp per day, how many days it will take to get there. 
 
