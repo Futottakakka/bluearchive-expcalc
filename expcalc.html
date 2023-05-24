@@ -1,469 +1,511 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>BA Sensei Exp Calculator</title>
-	    <style>
-      body {
-        background-color: #111;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-	  select {
-		font-size: 1.1em;
-		padding: 0.5em;
-		border: none;
-		border-radius: 0.25em;
-		background-color: #fff;
-		color: #111;
-		width: 10em;
-		cursor: pointer;
-		}
-	  a {
-		color: #eee
-		}
-      
-      h1 {
-        font-size: 2em;
-        text-align: center;
-      }
-	  h2 {
-        font-size: 1.5em;
-        text-align: center;
-      }
-      h3 {
-		font-size: 1em;
-		text-align: center;
-	  }
-	  h4 {
-		font-size: .85em;
-		text-align: center;
-	  }
-		
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      label {
-        display: inline-block;
-        margin: 1em 0 0.5em;
-      }
-      
-      input[type="number"] {
-        border-radius: 0.25em;
-        border: none;
-        padding: 0.5em;
-        font-size: 1.1em;
-        width: 10em;
-      }
-      
-      input[type="button"] {
-        background-color: #fff;
-        border: none;
-        border-radius: 0.25em;
-        color: #111;
-        cursor: pointer;
-        font-size: 1.1em;
-        margin: 1em 0 2em;
-        padding: 0.5em 1em;
-        text-transform: uppercase;
-      }
-      
-      input[type="button"]:hover {
-        background-color: #ddd;
-      }
-      
-      #expNeeded {
-        font-size: 1.5em;
-        margin: 1em;
-        text-align: center;
-		  }
-	  table {
-		border-collapse: collapse;
-		margin: 1rem 0;
-		background-color: #444;
-		color: #fff;
-		width: 30%;
-		margin: 0 auto;
-	  }
-
-	  th, td {
-		padding: 0.5rem;
-		border: 1px solid #fff;
-		text-align: center;
-	  }
-
-	  th {
-		background-color: #333;
-	  }
-
-	  tr:nth-child(even) {
-		background-color: #555;
-	  }
-    </style>
-  </head>
-  <body>
-    <h1>Blue Archive Sensei Exp Calculator</h1>
-	<h2>by Futotta-kakka</h2>
-	<h3><a href="https://github.com/aizawey479/ba-data"> EXP Data Source </a> | <a href="https://github.com/Futottakakka/bluearchive-expcalc"> EXP Calc Source </a></h3>
-    <form>
-      <label for="currentLevel">Current Level:</label>
-      <input type="number" id="currentLevel" name="currentLevel" min="1" max="84" value="1"><br><br>
-	  <label for="currentLevelExp">Current EXP in Level:</label>
-      <input type="number" id="currentLevelExp" name="currentLevelExp" min="0" max="9459" value="0"><br><br>
-      <label for="targetLevel">Target Level (max 85JP/83GLB):</label>
-      <input type="number" id="targetLevel" name="targetLevel" max="85" min="2" value="85"><br><br>
-	  <label for="cafeRank">Cafe Rank:</label>
-		<select id="cafeRank" name="cafeRank" onchange="updateExpPerDay()">
-		  <option value="90">1</option>
-		  <option value="150">2</option>
-		  <option value="220">3</option>
-		  <option value="300">4</option>
-		  <option value="390">5</option>
-		  <option value="460">6</option>
-		  <option value="530">7</option>
-		  <option value="600">8</option>
-		  <option value="670">9</option>
-		  <option value="740">10</option>
-		</select><br><br>
-		<label for="numApRefreshes">Number of AP Refreshes (Per Day):</label>
-		<select id="numApRefreshes" name="numApRefreshes" onchange="updateExpPerDay()">
-		  <option value="0">0</option>
-		  <option value="120">1</option>
-		  <option value="240">2</option>
-		  <option value="360">3</option>
-		  <option value="480">4</option>
-		  <option value="600">5</option>
-		  <option value="720">6</option>
-		  <option value="840">7</option>
-		  <option value="960">8</option>
-		  <option value="1080">9</option>
-		  <option value="1200">10</option>
-		  <option value="1320">11</option>
-		  <option value="1440">12</option>
-		  <option value="1560">13</option>
-		  <option value="1680">14</option>
-		  <option value="1800">15</option>
-		  <option value="1920">16</option>
-		  <option value="2040">17</option>
-		  <option value="2160">18</option>
-		  <option value="2280">19</option>
-		  <option value="2400">20</option>
-		</select><br><br>
-		<label for="TCCoinAP">Number of TC Coin Purchases (15 TC Coin(30AP)+30TC Coin(60AP)= 90AP per refresh, max 4 per day):</label>
-		<select id="TCCoinAP" name="TCCoinAP" onchange="updateExpPerDay()">
-		  <option value="0">0</option>
-		  <option value="90">1</option>
-		  <option value="180">2</option>
-		  <option value="270">3</option>
-		  <option value="360">4</option>
-		</select><br><br>
-	  <label for="expPerDay">Expected Exp/AP Spent per day:</label>
-	  <input type="number" id="expPerDay" name="expPerDay" min="540" max="9999" value="1">
-	  <p id="calculationDetails"></p>
-	  <br><br>
-      <input type="button" value="Calculate" onclick="calculateXP()"></br>
-	  <p id="expNeeded"></p> </br>
-	  <p> You receive: 
-		<ul>
-			<li>150 AP Daily from Missions</li>
-			<li>350 AP Weekly from Missions</li>
-			<li>240 AP Regen Per Day (1AP/6min. ~20hrs from 0-Cap at lvl70)</li>
-			<li>Cafe Bonus AP (<a href="#cafe-ap-table">Table</a>)</li>
-			<li>10 AP Club Bonus</li>
-			<li>Bonus AP Per Level Up (Depends on level)</li>
-			<li>You can buy up to 360AP with TC Coins per day (90*4 refreshes)</li>
-			<li> You can use Pyro for 120 AP per purchase(<a href="#pyro-ap-table">Table</a>)</li>
-		</ul>
-		Daily average (without cafe)<b>450AP</b></br>
-		<i>(daily mission) + (weekly/7) + (daily recharge) + (club bonus) = 150+(350/7)+240+10 = 450 AP/Day</i> </br>
-		+ 4x TC Purchases (360AP) OR 3x Pyro (360AP) = <b>810 AP/Day</b></br>
-		+ 4x TC Purchases AND 3x Pyro Refresh (360*2) = <b>1170 AP/Day</b></br>
-		+ Cafe Bonus (select current Cafe Level from dropdown, current max is 7 for GLB+JP)</br>
-		Please note that this will only provide a rough esitmate</br>
-		This does not include bonus XP from events/gifts and it doesn't include the AP refresh that occurs upon leveling up.</br>
-		I'd +/- 5-10 days from the estimate. </br>
-		</p>
-		<h3 id="pyro-ap-table"> Pyro AP Refresh Table </h3>
-		<table>
-	<thead>
-	  <tr>
-		<th>Refill</th>
-		<th>Price</th>
-		<th>Cumulative Price</th>
-		<th>Cumulative AP Gained</th>
-	  </tr>
-	</thead>
-		<tbody>
-		  <tr>
-			<td>1</td>
-			<td>30</td>
-			<td>30</td>
-			<td>120</td>
-		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>30</td>
-			<td>60</td>
-			<td>240</td>
-		  </tr>
-		  <tr>
-			<td>3</td>
-			<td>30</td>
-			<td>90</td>
-			<td>360</td>
-		  </tr>
-		  <tr>
-			<td>4</td>
-			<td>60</td>
-			<td>150</td>
-			<td>480</td>
-		  </tr>
-		  <tr>
-			<td>5</td>
-			<td>60</td>
-			<td>210</td>
-			<td>600</td>
-		  </tr>
-		  <tr>
-			<td>6</td>
-			<td>60</td>
-			<td>270</td>
-			<td>720</td>
-		  </tr>
-		  <tr>
-			<td>7</td>
-			<td>100</td>
-			<td>370</td>
-			<td>840</td>
-		  </tr>
-		  <tr>
-			<td>8</td>
-			<td>100</td>
-			<td>470</td>
-			<td>960</td>
-		  </tr>
-		  <tr>
-			<td>9</td>
-			<td>100</td>
-			<td>570</td>
-			<td>1080</td>
-		  </tr>
-		  <tr>
-			<td>10</td>
-			<td>150</td>
-			<td>720</td>
-			<td>1200</td>
-		  </tr>
-		  <tr>
-			<td>11</td>
-			<td>150</td>
-			<td>870</td>
-			<td>1320</td>
-		  </tr>
-		  <tr>
-			<td>12</td>
-			<td>150</td>
-			<td>1020</td>
-			<td>1440</td>
-		  </tr>
-		  <tr>
-			<td>13</td>
-			<td>200</td>
-			<td>1220</td>
-			<td>1560</td>
-		  </tr>
-		  <tr>
-			<td>14</td>
-			<td>200</td>
-			<td>1420</td>
-			<td>1680</td>
-		  </tr>
-		  <tr>
-			<td>15</td>
-			<td>200</td>
-			<td>1620</td>
-			<td>1800</td>
-		  </tr>
-		  <tr>
-			<td>16</td>
-			<td>300</td>
-			<td>1920</td>
-			<td>1920</td>
-		  </tr>
-		  <tr>
-			<td>17</td>
-			<td>300</td>
-			<td>2220</td>
-			<td>2040</td>
-		  </tr>
-		  <tr>
-			<td>18</td>
-			<td>300</td>
-			<td>2520</td>
-			<td>2160</td>
-		  </tr>
-		  <tr>
-			<td>19</td>
-			<td>300</td>
-			<td>2820</td>
-			<td>2280</td>
-		  </tr>
-		  <tr>
-			<td>20</td>
-			<td>300</td>
-			<td>3120</td>
-			<td>2400</td>
-		  </tr>
-		</tbody>
-	</table>
-    </form>
-    <script>
-      var levelData = [
-    {"level": 1, "exp": 8},
-    {"level": 2, "exp": 10},
-    {"level": 3, "exp": 15},
-    {"level": 4, "exp": 21},
-    {"level": 5, "exp": 28},
-    {"level": 6, "exp": 36},
-    {"level": 7, "exp": 45},
-    {"level": 8, "exp": 55},
-    {"level": 9, "exp": 66},
-    {"level": 10, "exp": 79},
-    {"level": 11, "exp": 93},
-    {"level": 12, "exp": 108},
-    {"level": 13, "exp": 124},
-    {"level": 14, "exp": 141},
-    {"level": 15, "exp": 159},
-    {"level": 16, "exp": 178},
-    {"level": 17, "exp": 198},
-    {"level": 18, "exp": 219},
-    {"level": 19, "exp": 241},
-    {"level": 20, "exp": 265},
-    {"level": 21, "exp": 288},
-    {"level": 22, "exp": 312},
-    {"level": 23, "exp": 337},
-    {"level": 24, "exp": 363},
-    {"level": 25, "exp": 390},
-    {"level": 26, "exp": 418},
-    {"level": 27, "exp": 447},
-    {"level": 28, "exp": 477},
-    {"level": 29, "exp": 508},
-    {"level": 30, "exp": 581},
-    {"level": 31, "exp": 656},
-    {"level": 32, "exp": 734},
-    {"level": 33, "exp": 814},
-    {"level": 34, "exp": 897},
-    {"level": 35, "exp": 982},
-    {"level": 36, "exp": 1069},
-    {"level": 37, "exp": 1159},
-    {"level": 38, "exp": 1251},
-    {"level": 39, "exp": 1346},
-    {"level": 40, "exp": 1443},
-    {"level": 41, "exp": 1543},
-    {"level": 42, "exp": 1645},
-    {"level": 43, "exp": 1750},
-    {"level": 44, "exp": 1857},
-    {"level": 45, "exp": 1966},
-    {"level": 46, "exp": 2078},
-    {"level": 47, "exp": 2192},
-    {"level": 48, "exp": 2309},
-    {"level": 49, "exp": 2428},
-    {"level": 50, "exp": 2550},
-    {"level": 51, "exp": 2674},
-    {"level": 52, "exp": 2800},
-    {"level": 53, "exp": 2929},
-    {"level": 54, "exp": 3060},
-    {"level": 55, "exp": 3194},
-    {"level": 56, "exp": 3330},
-    {"level": 57, "exp": 3469},
-    {"level": 58, "exp": 3610},
-    {"level": 59, "exp": 3754},
-    {"level": 60, "exp": 3900},
-    {"level": 61, "exp": 4048},
-    {"level": 62, "exp": 4199},
-    {"level": 63, "exp": 4352},
-    {"level": 64, "exp": 4508},
-    {"level": 65, "exp": 4666},
-    {"level": 66, "exp": 4831},
-    {"level": 67, "exp": 5007},
-    {"level": 68, "exp": 5186},
-    {"level": 69, "exp": 5369},
-    {"level": 70, "exp": 5556},
-    {"level": 71, "exp": 5747},
-    {"level": 72, "exp": 5942},
-    {"level": 73, "exp": 6141},
-    {"level": 74, "exp": 6344},
-    {"level": 75, "exp": 6552},
-    {"level": 76, "exp": 6768},
-    {"level": 77, "exp": 6989},
-    {"level": 78, "exp": 7216},
-    {"level": 79, "exp": 7449},
-    {"level": 80, "exp": 7682},
-    {"level": 81, "exp": 7915},
-    {"level": 82, "exp": 8148},
-    {"level": 83, "exp": 8381},
-    {"level": 84, "exp": 8883},
-    {"level": 85, "exp": 9460}
-  ];
-    function calculateXP() {
-		var currentLevel = parseInt(document.getElementById("currentLevel").value);
-		var targetLevel = parseInt(document.getElementById("targetLevel").value);
-		var currentLevelExp = parseInt(document.getElementById("currentLevelExp").value);
-	
-		if (isNaN(currentLevel) || isNaN(targetLevel) || isNaN(currentLevelExp))  {
-			alert("Please enter valid numbers for all fields.");
-			return;
-		}
-	
-		if (targetLevel <= currentLevel) {
-			alert("Target level must be greater than current level.");
-			return;
-		}
-		var expNeeded = 0;
-		for (var i = currentLevel - 1; i < targetLevel - 1; i++) {
-		expNeeded += levelData[i].exp;
-	}
-	document.getElementById("expNeeded").innerHTML = "XP needed: " + expNeeded;
-
-	var expPerDay = parseInt(document.getElementById("expPerDay").value);
-	var totalEXPNeeded = expNeeded - currentLevelExp;
-	var daysNeeded = Math.ceil((totalEXPNeeded / expPerDay));
-	var monthsNeeded = Math.ceil((daysNeeded / 30.44));
-
-	document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days (~"+ monthsNeeded + " months).";
-      }
-	function updateExpPerDay() {
-	  const cafeRankSelect = document.getElementById("cafeRank");
-	  const apRefreshSelect = document.getElementById("numApRefreshes");
-	  const expPerDayInput = document.getElementById("expPerDay");
-	  const baseExpPerDay = 450; // Set the base value to 450 (Daily average without cafe)
-	  const selectedCafeRankAP = parseInt(cafeRankSelect.value);
-	  const selectedTCCoinPurchases = parseInt(TCCoinAP.value);
-	  const selectedPyroRefreshAP = parseInt(numApRefreshes.value);
-	  const updatedExpPerDay = baseExpPerDay + selectedCafeRankAP + selectedPyroRefreshAP;
-
-	  expPerDayInput.value = updatedExpPerDay;
-}
-	function displayCalculationDetails() {
-	  const cafeBonus = parseInt(document.getElementById('cafeRank').value);
-	  const TCCoinAPBonus = parseInt(document.getElementById('TCCoinAP').value);
-	  const pyroRefresh = parseInt(document.getElementById('numApRefreshes').value);
-	  const dailyAmount = 450;
-	  const details = `Cafe Bonus: ${cafeBonus} + Daily Amount: ${dailyAmount} + Pyro Refresh AP: ${pyroRefresh} + TC Coin Purchases: ${TCCoinAPBonus}  = ${cafeBonus + dailyAmount + pyroRefresh + TCCoinAPBonus}`;
-	  document.getElementById('calculationDetails').innerText = details;
-	}
-	function updateExpPerDay() {
-  document.getElementById('expPerDay').value = parseInt(document.getElementById('cafeRank').value) + 450 + parseInt(document.getElementById('numApRefreshes').value) + parseInt(document.getElementById('TCCoinAP').value);
-  displayCalculationDetails();
-	}
-window.addEventListener('load', () => {
-  displayCalculationDetails();
-});
-    </script>
-  </body>
+   <head>
+      <meta charset="UTF-8">
+      <title>BA Sensei Exp Calculator</title>
+      <style>
+         body {
+         background-color: #111;
+         color: #fff;
+         font-family: Arial, sans-serif;
+         margin: 0;
+         padding: 0;
+         }
+         select {
+         font-size: 1.1em;
+         padding: 0.5em;
+         border: none;
+         border-radius: 0.25em;
+         background-color: #fff;
+         color: #111;
+         width: 10em;
+         cursor: pointer;
+         }
+         a {
+         color: #eee
+         }
+         h1 {
+         font-size: 2em;
+         text-align: center;
+         }
+         h2 {
+         font-size: 1.5em;
+         text-align: center;
+         }
+         h3 {
+         font-size: 1em;
+         text-align: center;
+         }
+         h4 {
+         font-size: .85em;
+         text-align: center;
+         }
+         .form-group {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         border-bottom: 1px solid #444;
+         padding: 20px 20px;
+         }
+         .form-group:nth-child(even) {
+         background-color: #222;
+         }
+         .form-group > div {
+         flex-basis: 33.33%;
+         }
+         .form-group label {
+         display: block;
+         margin-bottom: 5px;
+         }
+         label {
+         display: inline-block;
+         margin: 1em 0 0.5em;
+         }
+         input[type="number"] {
+         border-radius: 0.25em;
+         border: none;
+         padding: 0.5em;
+         font-size: 1.1em;
+         width: 10em;
+         }
+         input[type="button"] {
+         background-color: #fff;
+         border: none;
+         border-radius: 0.5em;
+         color: #111;
+         cursor: pointer;
+         font-size: 1.1em;
+         margin: 1em 2em 2em 2em;
+         padding: 0.5em 1em;
+         text-transform: uppercase;
+         }
+         input[type="button"]:hover {
+         background-color: #ddd;
+         }
+         #expNeeded {
+         font-size: 1.5em;
+         margin: 1em;
+         padding: 10px 10px 10px 10px;
+         text-align: center;
+         border: solid;
+         }
+         #details {
+         font-size: 1em;
+         margin: 1em;
+         padding: 10px 10px 10px 10px
+         }
+         #calculationDetails {
+         font-size: 1em;
+         margin: 1em;
+         padding: 10px 10px 10px 10px;
+         text-align: center;
+         }
+         table {
+         border-collapse: collapse;
+         margin: 1rem 0;
+         background-color: #444;
+         color: #fff;
+         width: 30%;
+         margin: 0 auto;
+         }
+         th, td {
+         padding: 0.5rem;
+         border: 1px solid #fff;
+         text-align: center;
+         }
+         th {
+         background-color: #333;
+         }
+         tr:nth-child(even) {
+         background-color: #555;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Blue Archive Sensei Exp Calculator</h1>
+      <h2>by Futotta-kakka</h2>
+      <h3><a href="https://github.com/aizawey479/ba-data"> EXP Data Source </a> | <a href=""> EXP Calc Source </a></h3>
+      <form>
+         <div class="form-group">
+            <div>
+               <label for="currentLevel">Current Level:</label>
+               <input type="number" id="currentLevel" name="currentLevel" min="1" max="84" value="1">
+            </div>
+            <div>
+               <label for="currentLevelExp">Current EXP in Level:</label>
+               <input type="number" id="currentLevelExp" name="currentLevelExp" min="0" max="9459" value="0">
+            </div>
+            <div>
+               <label for="targetLevel">Target Level (max 85JP/83GLB):</label>
+               <input type="number" id="targetLevel" name="targetLevel" max="85" min="2" value="85">
+            </div>
+         </div>
+         <div class="form-group">
+            <div>
+               <label for="cafeRank">Cafe Rank:</label>
+               <select id="cafeRank" name="cafeRank" onchange="updateExpPerDay()">
+                  <option value="90">1</option>
+                  <option value="150">2</option>
+                  <option value="220">3</option>
+                  <option value="300">4</option>
+                  <option value="390">5</option>
+                  <option value="460">6</option>
+                  <option value="530">7 (current max)</option>
+                  <option value="600">8 </option>
+                  <option value="670">9</option>
+                  <option value="740">10</option>
+               </select>
+            </div>
+            <div>
+               <label for="numApRefreshes">Number of AP Refreshes (Per Day):</label>
+               <select id="numApRefreshes" name="numApRefreshes" onchange="updateExpPerDay()">
+                  <option value="0">0</option>
+                  <option value="120">1</option>
+                  <option value="240">2</option>
+                  <option value="360">3</option>
+                  <option value="480">4</option>
+                  <option value="600">5</option>
+                  <option value="720">6</option>
+                  <option value="840">7</option>
+                  <option value="960">8</option>
+                  <option value="1080">9</option>
+                  <option value="1200">10</option>
+                  <option value="1320">11</option>
+                  <option value="1440">12</option>
+                  <option value="1560">13</option>
+                  <option value="1680">14</option>
+                  <option value="1800">15</option>
+                  <option value="1920">16</option>
+                  <option value="2040">17</option>
+                  <option value="2160">18</option>
+                  <option value="2280">19</option>
+                  <option value="2400">20</option>
+               </select>
+            </div>
+            <div>
+               <label for="TCCoinAP">Number of TC Coin Purchases (15 TC Coin(30AP)+30TC Coin(60AP)= 90AP per refresh, max 4 per day):</label>
+               <select id="TCCoinAP" name="TCCoinAP" onchange="updateExpPerDay()">
+                  <option value="0">0</option>
+                  <option value="90">1</option>
+                  <option value="180">2</option>
+                  <option value="270">3</option>
+                  <option value="360">4</option>
+               </select>
+            </div>
+         </div>
+         <div class="form-group">
+            <div>
+               <label for="expPerDay">Expected Exp/AP Spent per day:</label>
+               <input type="number" id="expPerDay" name="expPerDay" min="0" max="9999" value="1">
+            </div>
+            <div>
+               <p id="calculationDetails"></p>
+            </div>
+            <div>
+               <input type="button" value="Calculate" onclick="calculateXP()"></br>
+            </div>
+         </div>
+         <p id="expNeeded"> <b> Enter Values then hit Calculate Button </b> </p>
+         </br>
+         <p id="details"> 
+            You receive: 
+         <ul>
+            <li>150 AP Daily from Missions</li>
+            <li>350 AP Weekly from Missions</li>
+            <li>240 AP Regen Per Day (1AP/6min. ~20hrs from 0-Cap at lvl70)</li>
+            <li>Cafe Bonus AP (<a href="#cafe-ap-table">Table</a>)</li>
+            <li>10 AP Club Bonus</li>
+            <li>Bonus AP Per Level Up (Depends on level)</li>
+            <li>You can buy up to 360AP with TC Coins per day (90*4 refreshes)</li>
+            <li> You can use Pyro for 120 AP per purchase(<a href="#pyro-ap-table">Table</a>)</li>
+         </ul>
+         </p>
+         <p id="details"> 
+            Daily average (without cafe)= <b>450AP</b></br>
+            <i>(daily mission) + (weekly/7) + (daily recharge) + (club bonus) = 150+(350/7)+240+10 = 450 AP/Day</i> </br>
+            + 4x TC Purchases (360AP) OR 3x Pyro (360AP) = <b>810 AP/Day</b> </br>
+            + 4x TC Purchases AND 3x Pyro Refresh (360*2) = <b>1170 AP/Day</b></br>
+            + Cafe Bonus (select current Cafe Level from dropdown, current max is 7 for GLB+JP)</b></br>
+            Please note that this will only provide a rough esitmate, as it does not include bonus XP from events/gifts and it doesn't include the AP refresh that occurs upon leveling up.</br> 
+            <b>I would +/- 5-10 days from the estimate.</b> 
+         </p>
+         <h3 id="pyro-ap-table"> Pyro AP Refresh Table </h3>
+         <table>
+            <thead>
+               <tr>
+                  <th>Refill</th>
+                  <th>Price</th>
+                  <th>Cumulative Price</th>
+                  <th>Cumulative AP Gained</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>1</td>
+                  <td>30</td>
+                  <td>30</td>
+                  <td>120</td>
+               </tr>
+               <tr>
+                  <td>2</td>
+                  <td>30</td>
+                  <td>60</td>
+                  <td>240</td>
+               </tr>
+               <tr>
+                  <td>3</td>
+                  <td>30</td>
+                  <td>90</td>
+                  <td>360</td>
+               </tr>
+               <tr>
+                  <td>4</td>
+                  <td>60</td>
+                  <td>150</td>
+                  <td>480</td>
+               </tr>
+               <tr>
+                  <td>5</td>
+                  <td>60</td>
+                  <td>210</td>
+                  <td>600</td>
+               </tr>
+               <tr>
+                  <td>6</td>
+                  <td>60</td>
+                  <td>270</td>
+                  <td>720</td>
+               </tr>
+               <tr>
+                  <td>7</td>
+                  <td>100</td>
+                  <td>370</td>
+                  <td>840</td>
+               </tr>
+               <tr>
+                  <td>8</td>
+                  <td>100</td>
+                  <td>470</td>
+                  <td>960</td>
+               </tr>
+               <tr>
+                  <td>9</td>
+                  <td>100</td>
+                  <td>570</td>
+                  <td>1080</td>
+               </tr>
+               <tr>
+                  <td>10</td>
+                  <td>150</td>
+                  <td>720</td>
+                  <td>1200</td>
+               </tr>
+               <tr>
+                  <td>11</td>
+                  <td>150</td>
+                  <td>870</td>
+                  <td>1320</td>
+               </tr>
+               <tr>
+                  <td>12</td>
+                  <td>150</td>
+                  <td>1020</td>
+                  <td>1440</td>
+               </tr>
+               <tr>
+                  <td>13</td>
+                  <td>200</td>
+                  <td>1220</td>
+                  <td>1560</td>
+               </tr>
+               <tr>
+                  <td>14</td>
+                  <td>200</td>
+                  <td>1420</td>
+                  <td>1680</td>
+               </tr>
+               <tr>
+                  <td>15</td>
+                  <td>200</td>
+                  <td>1620</td>
+                  <td>1800</td>
+               </tr>
+               <tr>
+                  <td>16</td>
+                  <td>300</td>
+                  <td>1920</td>
+                  <td>1920</td>
+               </tr>
+               <tr>
+                  <td>17</td>
+                  <td>300</td>
+                  <td>2220</td>
+                  <td>2040</td>
+               </tr>
+               <tr>
+                  <td>18</td>
+                  <td>300</td>
+                  <td>2520</td>
+                  <td>2160</td>
+               </tr>
+               <tr>
+                  <td>19</td>
+                  <td>300</td>
+                  <td>2820</td>
+                  <td>2280</td>
+               </tr>
+               <tr>
+                  <td>20</td>
+                  <td>300</td>
+                  <td>3120</td>
+                  <td>2400</td>
+               </tr>
+            </tbody>
+         </table>
+      </form>
+      <script>
+         var levelData = [
+         {"level": 1, "exp": 8},
+         {"level": 2, "exp": 10},
+         {"level": 3, "exp": 15},
+         {"level": 4, "exp": 21},
+         {"level": 5, "exp": 28},
+         {"level": 6, "exp": 36},
+         {"level": 7, "exp": 45},
+         {"level": 8, "exp": 55},
+         {"level": 9, "exp": 66},
+         {"level": 10, "exp": 79},
+         {"level": 11, "exp": 93},
+         {"level": 12, "exp": 108},
+         {"level": 13, "exp": 124},
+         {"level": 14, "exp": 141},
+         {"level": 15, "exp": 159},
+         {"level": 16, "exp": 178},
+         {"level": 17, "exp": 198},
+         {"level": 18, "exp": 219},
+         {"level": 19, "exp": 241},
+         {"level": 20, "exp": 265},
+         {"level": 21, "exp": 288},
+         {"level": 22, "exp": 312},
+         {"level": 23, "exp": 337},
+         {"level": 24, "exp": 363},
+         {"level": 25, "exp": 390},
+         {"level": 26, "exp": 418},
+         {"level": 27, "exp": 447},
+         {"level": 28, "exp": 477},
+         {"level": 29, "exp": 508},
+         {"level": 30, "exp": 581},
+         {"level": 31, "exp": 656},
+         {"level": 32, "exp": 734},
+         {"level": 33, "exp": 814},
+         {"level": 34, "exp": 897},
+         {"level": 35, "exp": 982},
+         {"level": 36, "exp": 1069},
+         {"level": 37, "exp": 1159},
+         {"level": 38, "exp": 1251},
+         {"level": 39, "exp": 1346},
+         {"level": 40, "exp": 1443},
+         {"level": 41, "exp": 1543},
+         {"level": 42, "exp": 1645},
+         {"level": 43, "exp": 1750},
+         {"level": 44, "exp": 1857},
+         {"level": 45, "exp": 1966},
+         {"level": 46, "exp": 2078},
+         {"level": 47, "exp": 2192},
+         {"level": 48, "exp": 2309},
+         {"level": 49, "exp": 2428},
+         {"level": 50, "exp": 2550},
+         {"level": 51, "exp": 2674},
+         {"level": 52, "exp": 2800},
+         {"level": 53, "exp": 2929},
+         {"level": 54, "exp": 3060},
+         {"level": 55, "exp": 3194},
+         {"level": 56, "exp": 3330},
+         {"level": 57, "exp": 3469},
+         {"level": 58, "exp": 3610},
+         {"level": 59, "exp": 3754},
+         {"level": 60, "exp": 3900},
+         {"level": 61, "exp": 4048},
+         {"level": 62, "exp": 4199},
+         {"level": 63, "exp": 4352},
+         {"level": 64, "exp": 4508},
+         {"level": 65, "exp": 4666},
+         {"level": 66, "exp": 4831},
+         {"level": 67, "exp": 5007},
+         {"level": 68, "exp": 5186},
+         {"level": 69, "exp": 5369},
+         {"level": 70, "exp": 5556},
+         {"level": 71, "exp": 5747},
+         {"level": 72, "exp": 5942},
+         {"level": 73, "exp": 6141},
+         {"level": 74, "exp": 6344},
+         {"level": 75, "exp": 6552},
+         {"level": 76, "exp": 6768},
+         {"level": 77, "exp": 6989},
+         {"level": 78, "exp": 7216},
+         {"level": 79, "exp": 7449},
+         {"level": 80, "exp": 7682},
+         {"level": 81, "exp": 7915},
+         {"level": 82, "exp": 8148},
+         {"level": 83, "exp": 8381},
+         {"level": 84, "exp": 8883},
+         {"level": 85, "exp": 9460}
+         ];
+         function calculateXP() {
+         var currentLevel = parseInt(document.getElementById("currentLevel").value);
+         var targetLevel = parseInt(document.getElementById("targetLevel").value);
+         var currentLevelExp = parseInt(document.getElementById("currentLevelExp").value);
+         
+         if (isNaN(currentLevel) || isNaN(targetLevel) || isNaN(currentLevelExp))  {
+         alert("Please enter valid numbers for all fields.");
+         return;
+         }
+         
+         if (targetLevel <= currentLevel) {
+         alert("Target level must be greater than current level.");
+         return;
+         }
+         var expNeeded = 0;
+         for (var i = currentLevel - 1; i < targetLevel - 1; i++) {
+         expNeeded += levelData[i].exp;
+         }
+         document.getElementById("expNeeded").innerHTML = "XP needed: " + expNeeded;
+         
+         var expPerDay = parseInt(document.getElementById("expPerDay").value);
+         var totalEXPNeeded = expNeeded - currentLevelExp;
+         var daysNeeded = Math.ceil((totalEXPNeeded / expPerDay));
+         var monthsNeeded = Math.ceil((daysNeeded / 30.44));
+         
+         document.getElementById("expNeeded").innerHTML = "Exp needed: " + totalEXPNeeded + ". Estimated time to reach target level: " + daysNeeded + " days (~"+ monthsNeeded + " months).";
+         }
+         function updateExpPerDay() {
+         const cafeRankSelect = document.getElementById("cafeRank");
+         const apRefreshSelect = document.getElementById("numApRefreshes");
+         const expPerDayInput = document.getElementById("expPerDay");
+         const baseExpPerDay = 450; // Set the base value to 450 (Daily average without cafe)
+         const selectedCafeRankAP = parseInt(cafeRankSelect.value);
+         const selectedTCCoinPurchases = parseInt(TCCoinAP.value);
+         const selectedPyroRefreshAP = parseInt(numApRefreshes.value);
+         const updatedExpPerDay = baseExpPerDay + selectedCafeRankAP + selectedPyroRefreshAP;
+         
+         expPerDayInput.value = updatedExpPerDay;
+         }
+         function displayCalculationDetails() {
+         const cafeBonus = parseInt(document.getElementById('cafeRank').value);
+         const TCCoinAPBonus = parseInt(document.getElementById('TCCoinAP').value);
+         const pyroRefresh = parseInt(document.getElementById('numApRefreshes').value);
+         const dailyAmount = 450;
+         const details = `Cafe Bonus: ${cafeBonus} + Daily Amount: ${dailyAmount} + Pyro Refresh AP: ${pyroRefresh} + TC Coin Purchases: ${TCCoinAPBonus}  = ${cafeBonus + dailyAmount + pyroRefresh + TCCoinAPBonus}`;
+         document.getElementById('calculationDetails').innerText = details;
+         }
+         function updateExpPerDay() {
+         document.getElementById('expPerDay').value = parseInt(document.getElementById('cafeRank').value) + 450 + parseInt(document.getElementById('numApRefreshes').value) + parseInt(document.getElementById('TCCoinAP').value);
+         displayCalculationDetails();
+         }
+         window.addEventListener('load', () => {
+         displayCalculationDetails();
+         });
+      </script>
+   </body>
 </html>
