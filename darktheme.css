@@ -1,118 +1,140 @@
-         body {
-         background-color: #111;
-         color: #fff;
-         font-family: Arial, sans-serif;
-         margin: 0;
-         padding: 0;
-	     margin: 0 auto;
-	     max-width: 1280px;
-         }
-         select {
-         font-size: 1.1em;
-         padding: 0.5em;
-         border: none;
-         border-radius: 0.25em;
-         background-color: #fff;
-         color: #111;
-         width: 10em;
-         cursor: pointer;
-         }
-         a {
-         color: #eee
-         }
-         h1 {
-         font-size: 2em;
-         text-align: center;
-         }
-         h2 {
-         font-size: 1.5em;
-         text-align: center;
-         }
-         h3 {
-         font-size: 1em;
-         text-align: center;
-         }
-         h4 {
-         font-size: .85em;
-         text-align: center;
-         }
-         .form-group {
-         display: flex;
-         flex-direction: row;
-         justify-content: space-between;
-         align-items: center;
-         border-bottom: 1px solid #444;
-         padding: 20px 20px;
-         }
-         .form-group:nth-child(even) {
-         background-color: #222;
-         }
-         .form-group > div {
-         flex-basis: 33.33%;
-         }
-         .form-group label {
-         display: block;
-         margin-bottom: 5px;
-         }
-         label {
-         display: inline-block;
-         margin: 1em 0 0.5em;
-         }
-         input[type="number"] {
-         border-radius: 0.25em;
-         border: none;
-         padding: 0.5em;
-         font-size: 1.1em;
-         width: 10em;
-         }
-         input[type="button"] {
-         background-color: #fff;
-         border: none;
-         border-radius: 0.5em;
-         color: #111;
-         cursor: pointer;
-         font-size: 1.1em;
-         margin: 1em 2em 2em 2em;
-         padding: 0.5em 1em;
-         text-transform: uppercase;
-         }
-         input[type="button"]:hover {
-         background-color: #ddd;
-         }
-         #expNeeded {
-         font-size: 1.5em;
-         margin: 1em;
-         padding: 10px 10px 10px 10px;
-         text-align: center;
-         border: solid;
-         }
-         #details {
-         font-size: 1em;
-         margin: 1em;
-         padding: 10px 10px 10px 10px
-         }
-         #calculationDetails {
-         font-size: 1em;
-         margin: 1em;
-         padding: 10px 10px 10px 10px;
-         text-align: center;
-         }
-         table {
-         border-collapse: collapse;
-         margin: 1rem 0;
-         background-color: #444;
-         color: #fff;
-         width: 30%;
-         margin: 0 auto;
-         }
-         th, td {
-         padding: 0.5rem;
-         border: 1px solid #fff;
-         text-align: center;
-         }
-         th {
-         background-color: #333;
-         }
-         tr:nth-child(even) {
-         background-color: #555;
-         }
+body {
+    background-color: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+select {
+    font-size: 1.1em;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.25em;
+    background-color: #fff;
+    color: #111;
+    width: 10em;
+    cursor: pointer;
+}
+
+a {
+    color: #eee
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1em;
+    text-align: center;
+}
+
+h4 {
+    font-size: .85em;
+    text-align: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding: 20px 20px;
+}
+
+.form-group:nth-child(even) {
+    background-color: #222;
+}
+
+.form-group>div {
+    flex-basis: 33.33%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+label {
+    display: inline-block;
+    margin: 1em 0 0.5em;
+}
+
+input[type="number"] {
+    border-radius: 0.25em;
+    border: none;
+    padding: 0.5em;
+    font-size: 1.1em;
+    width: 10em;
+}
+
+input[type="button"] {
+    background-color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    color: #111;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin: 1em 2em 2em 2em;
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+}
+
+input[type="button"]:hover {
+    background-color: #ddd;
+}
+
+#expNeeded {
+    font-size: 1.5em;
+    margin: 1em;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    border: solid;
+}
+
+#details {
+    font-size: 1em;
+    margin: 1em;
+    padding: 10px 10px 10px 10px
+}
+
+#calculationDetails {
+    font-size: 1em;
+    margin: 1em;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background-color: #444;
+    color: #fff;
+    width: 30%;
+    margin: 0 auto;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    border: 1px solid #fff;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #555;
+}
