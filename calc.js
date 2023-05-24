@@ -85,6 +85,7 @@
          {"level": 84, "exp": 8883},
          {"level": 85, "exp": 9460}
          ];
+         
          function calculateXP() {
          var currentLevel = parseInt(document.getElementById("currentLevel").value);
          var targetLevel = parseInt(document.getElementById("targetLevel").value);
@@ -139,3 +140,17 @@
          window.addEventListener('load', () => {
          displayCalculationDetails();
          });
+
+        //Theme Toggle Script
+        var themeToggle = document.getElementById('theme-toggle');
+        var themeStyle = document.getElementById('theme-style');
+
+        themeToggle.addEventListener('click', function() {
+        if (themeStyle.getAttribute('href') === 'darktheme.css') {
+            themeStyle.href = 'lighttheme.css';
+            themeToggle.textContent = 'Dark Mode';
+        } else {
+            themeStyle.href = 'darktheme.css';
+            themeToggle.textContent = 'Light Mode';
+        }
+        });
