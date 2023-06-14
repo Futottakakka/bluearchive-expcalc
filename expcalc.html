@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
    <meta charset="UTF-8">
    <title>BA Sensei Exp Calculator</title>
-   <link id="theme-style" rel="stylesheet" type="text/css" href="darktheme.css">
+   <link id="theme-style" rel="stylesheet" type="text/css" href="css/darktheme.css">
 </head>
 
 <body>
@@ -13,6 +12,7 @@
    <h3><a href="https://github.com/aizawey479/ba-data"> EXP Data Source </a> | <a
          href="https://github.com/Futottakakka/bluearchive-expcalc/tree/main"> EXP Calc Source </a></h3>
    <h3>Toggle Theme <button id="theme-toggle">Light Mode</button></h3>
+   <h3><a href="bondEXPCalc.html">Student Bond EXP Calculator</a></h3>
    <form>
       <div class="form-group">
          <div>
@@ -102,7 +102,7 @@
          <li>150 AP Daily from Missions</li>
          <li>350 AP Weekly from Missions</li>
          <li>240 AP Regen Per Day (1AP/6min. ~20hrs from 0-Cap at lvl70)</li>
-         <li>Cafe Bonus AP (<a href="#cafe-ap-table">Table</a>)</li>
+         <li>Cafe Bonus AP</li>
          <li>10 AP Club Bonus</li>
          <li>Bonus AP Per Level Up (Depends on level)</li>
          <li>You can buy up to 360AP with TC Coins per day (90*4 refreshes)</li>
@@ -115,145 +115,14 @@
          + 4x TC Purchases (360AP) OR 3x Pyro (360AP) = <b>810 AP/Day</b> </br>
          + 4x TC Purchases AND 3x Pyro Refresh (360*2) = <b>1170 AP/Day</b></br>
          + Cafe Bonus (select current Cafe Level from dropdown, current max is 7 for GLB+JP)</b></br>
-         Please note that this will only provide a rough esitmate, as it does not include bonus XP from events/gifts and
+         <b>Please note that this will only provide a rough esitmate, as it does not include bonus XP from events/gifts and
          it doesn't include the AP refresh that occurs upon leveling up.</br>
-         <b>I would +/- 5-10 days from the estimate.</b>
+         I would +/- 5-10 days from the estimate.</b>
       </p>
       <h3 id="pyro-ap-table"> Pyro AP Refresh Table </h3>
-      <table>
-         <thead>
-            <tr>
-               <th>Refill</th>
-               <th>Price</th>
-               <th>Cumulative Price</th>
-               <th>Cumulative AP Gained</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td>1</td>
-               <td>30</td>
-               <td>30</td>
-               <td>120</td>
-            </tr>
-            <tr>
-               <td>2</td>
-               <td>30</td>
-               <td>60</td>
-               <td>240</td>
-            </tr>
-            <tr>
-               <td>3</td>
-               <td>30</td>
-               <td>90</td>
-               <td>360</td>
-            </tr>
-            <tr>
-               <td>4</td>
-               <td>60</td>
-               <td>150</td>
-               <td>480</td>
-            </tr>
-            <tr>
-               <td>5</td>
-               <td>60</td>
-               <td>210</td>
-               <td>600</td>
-            </tr>
-            <tr>
-               <td>6</td>
-               <td>60</td>
-               <td>270</td>
-               <td>720</td>
-            </tr>
-            <tr>
-               <td>7</td>
-               <td>100</td>
-               <td>370</td>
-               <td>840</td>
-            </tr>
-            <tr>
-               <td>8</td>
-               <td>100</td>
-               <td>470</td>
-               <td>960</td>
-            </tr>
-            <tr>
-               <td>9</td>
-               <td>100</td>
-               <td>570</td>
-               <td>1080</td>
-            </tr>
-            <tr>
-               <td>10</td>
-               <td>150</td>
-               <td>720</td>
-               <td>1200</td>
-            </tr>
-            <tr>
-               <td>11</td>
-               <td>150</td>
-               <td>870</td>
-               <td>1320</td>
-            </tr>
-            <tr>
-               <td>12</td>
-               <td>150</td>
-               <td>1020</td>
-               <td>1440</td>
-            </tr>
-            <tr>
-               <td>13</td>
-               <td>200</td>
-               <td>1220</td>
-               <td>1560</td>
-            </tr>
-            <tr>
-               <td>14</td>
-               <td>200</td>
-               <td>1420</td>
-               <td>1680</td>
-            </tr>
-            <tr>
-               <td>15</td>
-               <td>200</td>
-               <td>1620</td>
-               <td>1800</td>
-            </tr>
-            <tr>
-               <td>16</td>
-               <td>300</td>
-               <td>1920</td>
-               <td>1920</td>
-            </tr>
-            <tr>
-               <td>17</td>
-               <td>300</td>
-               <td>2220</td>
-               <td>2040</td>
-            </tr>
-            <tr>
-               <td>18</td>
-               <td>300</td>
-               <td>2520</td>
-               <td>2160</td>
-            </tr>
-            <tr>
-               <td>19</td>
-               <td>300</td>
-               <td>2820</td>
-               <td>2280</td>
-            </tr>
-            <tr>
-               <td>20</td>
-               <td>300</td>
-               <td>3120</td>
-               <td>2400</td>
-            </tr>
-         </tbody>
-      </table>
+      <table><thead><tr><th>Refill</th><th>Price</th><th>Cumulative Price</th><th>Cumulative AP Gained</th></tr></thead><tbody><tr><td>1</td><td>30</td><td>30</td><td>120</td></tr><tr><td>2</td><td>30</td><td>60</td><td>240</td></tr><tr><td>3</td><td>30</td><td>90</td><td>360</td></tr><tr><td>4</td><td>60</td><td>150</td><td>480</td></tr><tr><td>5</td><td>60</td><td>210</td><td>600</td></tr><tr><td>6</td><td>60</td><td>270</td><td>720</td></tr><tr><td>7</td><td>100</td><td>370</td><td>840</td></tr><tr><td>8</td><td>100</td><td>470</td><td>960</td></tr><tr><td>9</td><td>100</td><td>570</td><td>1080</td></tr><tr><td>10</td><td>150</td><td>720</td><td>1200</td></tr><tr><td>11</td><td>150</td><td>870</td><td>1320</td></tr><tr><td>12</td><td>150</td><td>1020</td><td>1440</td></tr><tr><td>13</td><td>200</td><td>1220</td><td>1560</td></tr><tr><td>14</td><td>200</td><td>1420</td><td>1680</td></tr><tr><td>15</td><td>200</td><td>1620</td><td>1800</td></tr><tr><td>16</td><td>300</td><td>1920</td><td>1920</td></tr><tr><td>17</td><td>300</td><td>2220</td><td>2040</td></tr><tr><td>18</td><td>300</td><td>2520</td><td>2160</td></tr><tr><td>19</td><td>300</td><td>2820</td><td>2280</td></tr><tr><td>20</td><td>300</td><td>3120</td><td>2400</td></tr></tbody></table>
    </form>
-   <script src="calc.js"></script>
+   <script src="scripts/calc.js"></script>
 </body>
 
 </html>

@@ -146,11 +146,11 @@ var themeToggle = document.getElementById('theme-toggle');
 var themeStyle = document.getElementById('theme-style');
 
 themeToggle.addEventListener('click', function () {
-    if (themeStyle.getAttribute('href') === 'darktheme.css') {
-        themeStyle.href = 'lighttheme.css';
+    if (themeStyle.getAttribute('href') === 'css/darktheme.css') {
+        themeStyle.href = 'css/lighttheme.css';
         themeToggle.textContent = 'Dark Mode';
     } else {
-        themeStyle.href = 'darktheme.css';
+        themeStyle.href = 'css/darktheme.css';
         themeToggle.textContent = 'Light Mode';
     }
 });

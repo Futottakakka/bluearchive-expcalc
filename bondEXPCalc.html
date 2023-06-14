@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bond EXP Calculator</title>
+    <link id="theme-style" rel="stylesheet" type="text/css" href="css/darktheme.css">
+</head>
+<body>
+    <h1>Blue Archive Relationship Exp Calculator</h1>
+   <h2>by Futotta-kakka</h2>
+   <h3><a href="https://bluearchive.fandom.com/wiki/Affection"> Relationship Data Source </a> | <a
+         href="https://github.com/Futottakakka/bluearchive-expcalc/tree/main"> EXP Calc Source </a></h3>
+   <h3>Toggle Theme <button id="theme-toggle">Light Mode</button></h3>
+   <h3><a href="expcalc.html">Sensei Account EXP Calculator</a></h3>
+    <div class="form-group">
+        <div>
+            <label for="start">Start Level:</label>
+            <input type="number" id="start" name="start" min="1" max="100" required>
+        </div>
+        <div>
+            <label for="end">End Level:</label>
+            <input type="number" id="end" name="end" min="2" max="100" required>
+        </div>
+        <div>
+            <input type="button" id="calculate" value="Calculate">
+        </div>
+    </div>
+    <h3> Table copied from <a href="https://bluearchive.fandom.com/wiki/Affection#Effect"> Here</a></h3>
+    <div id="result">
+        <!-- Results will be displayed here -->
+    </div>
+    <div class="form-group">
+        <table><tbody><tr><td colspan="5"><b>Reactions</b></td></tr><tr><td><b>Checking In</b></td><td><b>Small Effect</b></td><td><b>Normal Effect</b></td><td><b>Great Effect</b></td><td><b>Amazing Effect</b></td></tr><tr><td rowspan="5"><a href="https://static.wikia.nocookie.net/blue-archive/images/f/f5/Headpat_Icon.png/revision/latest?cb=20220514181945"><img alt="Headpat Icon" src="https://static.wikia.nocookie.net/blue-archive/images/f/f5/Headpat_Icon.png/revision/latest/scale-to-width-down/50?cb=20220514181945" decoding="async" loading="lazy" width="50" height="50" data-image-name="Headpat Icon.png" data-image-key="Headpat_Icon.png" data-src="https://static.wikia.nocookie.net/blue-archive/images/f/f5/Headpat_Icon.png/revision/latest/scale-to-width-down/50?cb=20220514181945"></a><span>Headpat Icon</span>⁠<br><b>Meh</b><br><b>+15 Bond Exp</b><sup id="cite_ref-2"><a href="https://bluearchive.fandom.com/wiki/Affection#cite_note-2">[2]</a></sup></td><td><a href="https://static.wikia.nocookie.net/blue-archive/images/c/c9/Small_Effect.png/revision/latest?cb=20210415115949"><img alt="Small Effect" src="https://static.wikia.nocookie.net/blue-archive/images/c/c9/Small_Effect.png/revision/latest/scale-to-width-down/50?cb=20210415115949" decoding="async" loading="lazy" width="50" height="50" data-image-name="Small Effect.png" data-image-key="Small_Effect.png" data-src="https://static.wikia.nocookie.net/blue-archive/images/c/c9/Small_Effect.png/revision/latest/scale-to-width-down/50?cb=20210415115949"></a><span>Small Effect</span>⁠<br><b>Meh</b><br></td><td><a href="https://static.wikia.nocookie.net/blue-archive/images/1/1f/Normal_Effect.png/revision/latest?cb=20210415115948"><img alt="Normal Effect" src="https://static.wikia.nocookie.net/blue-archive/images/1/1f/Normal_Effect.png/revision/latest/scale-to-width-down/50?cb=20210415115948" decoding="async" loading="lazy" width="50" height="50" data-image-name="Normal Effect.png" data-image-key="Normal_Effect.png" data-src="https://static.wikia.nocookie.net/blue-archive/images/1/1f/Normal_Effect.png/revision/latest/scale-to-width-down/50?cb=20210415115948"></a><span>Normal Effect</span>⁠<br><b>Like</b><br></td><td><a href="https://static.wikia.nocookie.net/blue-archive/images/6/62/Great_Effect.png/revision/latest?cb=20210415115947"><img alt="Great Effect" src="https://static.wikia.nocookie.net/blue-archive/images/6/62/Great_Effect.png/revision/latest/scale-to-width-down/50?cb=20210415115947" decoding="async" loading="lazy" width="50" height="50" data-image-name="Great Effect.png" data-image-key="Great_Effect.png" data-src="https://static.wikia.nocookie.net/blue-archive/images/6/62/Great_Effect.png/revision/latest/scale-to-width-down/50?cb=20210415115947"></a><span>Great Effect</span>⁠<br><b>Favourite</b></td><td><a href="https://static.wikia.nocookie.net/blue-archive/images/2/2f/Amazing_Effect.png/revision/latest?cb=20220725131757"><img alt="Amazing Effect" src="https://static.wikia.nocookie.net/blue-archive/images/2/2f/Amazing_Effect.png/revision/latest/scale-to-width-down/50?cb=20220725131757" decoding="async" loading="lazy" width="50" height="50" data-image-name="Amazing Effect.png" data-image-key="Amazing_Effect.png" data-src="https://static.wikia.nocookie.net/blue-archive/images/2/2f/Amazing_Effect.png/revision/latest/scale-to-width-down/50?cb=20220725131757"></a><span>Amazing Effect</span>⁠<br><b>Loved</b></td></tr><tr><td colspan="4"><b>Gift Exp (★★)</b></td></tr><tr><td><b>+20 Bond Exp</b></td><td><b>+40 Bond Exp</b></td><td><b>+60 Bond Exp</b></td><td><b>+80 Bond Exp</b></td></tr><tr><td colspan="4"><b>Gift Exp (★★★)</b></td></tr><tr><td><b>+60 Bond Exp</b></td><td><b>+120 Bond Exp</b></td><td><b>+180 Bond Exp</b></td><td><b>+240 Bond Exp</b></td></tr></tbody></table>
+    </div>
+    <script src="scripts/bondexpcalc.js"></script>
+</body>
+</html>
