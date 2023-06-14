@@ -11,7 +11,7 @@ body {
 select {
     font-size: 1.1em;
     padding: 0.5em;
-    border: none;
+    border: solid;
     border-radius: 0.25em;
     background-color: #fff;
     color: #111;
@@ -73,7 +73,7 @@ label {
 
 input[type="number"] {
     border-radius: 0.25em;
-    border: none;
+    border: solid;
     padding: 0.5em;
     font-size: 1.1em;
     width: 10em;
@@ -83,7 +83,7 @@ input[type="button"] {
     background-color: #02D3FB;
     border: none;
     border-radius: 0.5em;
-    color: #fff;
+    color: #000;
     cursor: pointer;
     font-size: 1.1em;
     margin: 1em 2em 2em 2em;
