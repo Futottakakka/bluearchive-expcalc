@@ -115,6 +115,20 @@ const gifts = {
     loved3Star: 240,
 };
 
+// Look-up dictionary for variable names to HTML
+const giftNameToHtml = {
+    checkIn: '<div class="gift-item"><img src="img/Headpat_Icon.webp" alt="Check-In"/><p>Cafe Check-In</p></div>',
+    mehGift2Star: '<div class="gift-item"><img src="img/Small_Effect.webp" alt="2 Star Gift"/><p>Meh/Small 2 Star Gift</p></div>',
+    likeGift2Star: '<div class="gift-item"><img src="img/Normal_Effect.webp" alt="2 Star Gift"/><p>Like/Normal 2 Star Gift</p></div>',
+    favorite2Star: '<div class="gift-item"><img src="img/Great_Effect.webp" alt="2 Star Gift"/><p>Favorite/Great 2 Star Gift</p></div>',
+    loved2Star: '<div class="gift-item"><img src="img/Amazing_Effect.webp" alt="2 Star Gift"/><p>Loved/Amazing 2 Star Gift</p></div>',
+    mehGift3Star: '<div class="gift-item"><img src="img/Small_Effect.webp" alt="3 Star Gift"/><p>Meh/Small 3 Star Gift</p></div>',
+    likeGift3Star: '<div class="gift-item"><img src="img/Normal_Effect.webp" alt="3 Star Gift"/><p>Like/Normal 3 Star Gift</p></div>',
+    favorite3Star: '<div class="gift-item"><img src="img/Great_Effect.webp" alt="3 Star Gift"/><p>Favorite/Great 3 Star Gift</p></div>',
+    loved3Star: '<div class="gift-item"><img src="img/Amazing_Effect.webp" alt="3 Star Gift"/><p>Loved/Amazing 3 Star Gift</p></div>',
+};
+
+
 // Function to calculate the amount of gifts required for a specific EXP
 function calculateGifts(exp) {
     const giftResults = {};
@@ -178,10 +192,19 @@ themeToggle.addEventListener('click', function () {
         themeToggle.textContent = 'Light Mode';
     }
 })
+//Access input elements once and use their values inside event listener
+const startLevelInput = document.getElementById('start');
+const endLevelInput = document.getElementById('end');
+
+function createTableRows(data) {
+    return Object.entries(data)
+        .map(([key, val]) => `<tr><td>${giftNameToHtml[key] || key}</td><td>${val.count || val.quantity}</td><td>${val.totalXP}</td>${val.wastedXP !== undefined ? `<td>${val.wastedXP}</td>` : ""}</tr>`)
+        .join('');
+}
 
 document.getElementById('calculate').addEventListener('click', function (e) {
-    const startLevel = parseInt(document.getElementById('start').value);
-    const endLevel = parseInt(document.getElementById('end').value);
+    const startLevel = parseInt(startLevelInput.value);
+    const endLevel = parseInt(endLevelInput.value);
 
     // Calculate the total required EXP
     const totalRequiredExp = bondExpData[endLevel - 1].totalExp - bondExpData[startLevel - 1].totalExp;
@@ -192,22 +215,23 @@ document.getElementById('calculate').addEventListener('click', function (e) {
     // Find optimal gifts
     const optimalGifts = findOptimalGifts(totalRequiredExp);
 
-    // Display the results
-    let resultHtml = `<div id="expNeeded">Total Required EXP: ${totalRequiredExp}</div>`;
-    resultHtml += `<div id="calculationDetails"><table><tr><th>Gift</th><th>Quantity</th><th>Total XP</th><th>Wasted XP</th></tr>`;
-
-    for (const gift in giftsRequired) {
-        resultHtml += `<tr><td>${gift}</td><td>${giftsRequired[gift].quantity}</td><td>${giftsRequired[gift].totalXP}</td><td>${giftsRequired[gift].wastedXP}</td></tr>`;
-    }
-
-    resultHtml += `</table></div>`;
-    resultHtml += `<div id="optimalGifts"><h3>Optimal Gifts:</h3><table><tr><th>Gift</th><th>Quantity</th><th>Total XP</th></tr>`;
-
-    for (const gift in optimalGifts) {
-        resultHtml += `<tr><td>${gift}</td><td>${optimalGifts[gift].count}</td><td>${optimalGifts[gift].totalXP}</td></tr>`;
-    }
-
-    resultHtml += `</table></div>`;
+    // Construct the result HTML using a template string
+    let resultHtml = `
+        <div id="expNeeded">Total Required EXP: ${totalRequiredExp}</div>
+        <div id="calculationDetails">
+            <table>
+                <tr><th>Gift</th><th>Quantity</th><th>Total XP</th><th>Wasted XP</th></tr>
+                ${createTableRows(giftsRequired)}
+            </table>
+        </div>
+        <div id="optimalGifts">
+            <h3>Optimal Gifts:</h3>
+            <table>
+                <tr><th>Gift</th><th>Quantity</th><th>Total XP</th></tr>
+                ${createTableRows(optimalGifts)}
+            </table>
+        </div>
+    `;
 
     document.getElementById('result').innerHTML = resultHtml;
 });
