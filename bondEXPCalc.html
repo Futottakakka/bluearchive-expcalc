@@ -1,106 +1,172 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Bond EXP Calculator</title>
-    <link id="theme-style" rel="stylesheet" type="text/css" href="css/darktheme.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-    <link rel="manifest" href="img/site.webmanifest">
+   <title>Bond EXP Calculator</title>
+   <link id="theme-style" rel="stylesheet" type="text/css" href="css/darktheme.css">
+   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+   <link rel="manifest" href="img/site.webmanifest">
 </head>
+
 <body>
-    <h1 style="color: pink">Blue Archive Relationship Exp Calculator</h1>
+   <h1 style="color: pink">Blue Archive Relationship Exp Calculator</h1>
    <h2>by Futotta-kakka</h2>
    <h3><a href="https://bluearchive.fandom.com/wiki/Affection"> Relationship Data Source </a> | <a
          href="https://github.com/Futottakakka/bluearchive-expcalc/tree/main"> EXP Calc Source </a></h3>
    <h3>Toggle Theme <button id="theme-toggle">Light Mode</button></h3>
    <h3><a href="expcalc.html" style="color: lightseagreen">Sensei Account EXP Calculator</a></h3>
    <p>
-    <p>A simple calculator to show much relationship/bond EXP is needed to get from level X to level Y.</p>
-    <p>Will also show a table of the various gift types and how many of them it will take to level up their bond level.</p>
-    <p>The optimized path isn't super useful for large level gaps, but intended for something like level 20-22.</p>
-    <p>Even then, getting large numbers of 3* gifts is hard so, YMMV.</p>
+   <p>A simple calculator to show much relationship/bond EXP is needed to get from level X to level Y.</p>
+   <p>Will also show a table of the various gift types and how many of them it will take to level up their bond level.
    </p>
-    <div class="form-group">
-        <div>
-            <label for="start">Starting Bond/Relationship Level:</label>
-            <input type="number" id="start" name="start" min="1" max="100" value=1 required>
-        </div>
-        <div>
-            <label for="end">Desired Bond/Relationship Level:</label>
-            <input type="number" id="end" name="end" min="2" max="100" value=2 required>
-        </div>
-        <div>
-            <input type="button" id="calculate" value="Calculate">
-        </div>
-    </div>
-    <h3> Table copied from <a href="https://bluearchive.fandom.com/wiki/Affection#Effect"> Here</a></h3>
-    <div class="form-group">
-        <table>
-            <tbody>
-               <tr>
-                  <td colspan="5"><b>Reactions</b></td>
-               </tr>
-               <tr>
-                  <td><b>Checking In</b></td>
-                  <td><b>Small Effect</b></td>
-                  <td><b>Normal Effect</b></td>
-                  <td><b>Great Effect</b></td>
-                  <td><b>Amazing Effect</b></td>
-               </tr>
-               <tr>
-                  <td rowspan="5"><a href="img/Headpat_Icon.webp"><img alt="Headpat Icon" src="img/Headpat_Icon.webp"></a>
-                     <span>Headpat Icon</span>
-                     <br><b>Meh</b>
-                     <br><b>+15 Bond Exp</b>
-                  </td>
-                  <td><a href="img/Small_Effect.webp"><img alt="Small Effect" src="img/Small_Effect.webp"></a>
-                     <span>Small Effect
-                     </span>
-                     <br><b>Meh</b>
-                     <br>
-                  </td>
-                  <td><a href="img/Normal_Effect.webp"><img alt="Normal Effect" src="img/Normal_Effect.webp"></a>
-                     <span>Normal Effect
-                     </span>
-                     <br><b>Like</b>
-                     <br>
-                  </td>
-                  <td><a href="img/Great_Effect.webp"><img alt="Great Effect" src="img/Great_Effect.webp"></a>
-                     <span>Great Effect
-                     </span>
-                     <br><b>Favourite</b>
-                  </td>
-                  <td><a href="img/Amazing_Effect.webp"><img alt="Amazing Effect" src="img/Amazing_Effect.webp"></a>
-                     <span>Amazing Effect
-                     </span>
-                     <br><b>Loved</b>
-                  </td>
-               </tr>
-               <tr>
-                  <td colspan="4"><b>Gift Exp (★★)</b></td>
-               </tr>
-               <tr>
-                  <td><b>+20 Bond Exp</b></td>
-                  <td><b>+40 Bond Exp</b></td>
-                  <td><b>+60 Bond Exp</b></td>
-                  <td><b>+80 Bond Exp</b></td>
-               </tr>
-               <tr>
-                  <td colspan="4"><b>Gift Exp (★★★)</b></td>
-               </tr>
-               <tr>
-                  <td><b>+60 Bond Exp</b></td>
-                  <td><b>+120 Bond Exp</b></td>
-                  <td><b>+180 Bond Exp</b></td>
-                  <td><b>+240 Bond Exp</b></td>
-               </tr>
-            </tbody>
-         </table> 
-    </div>
-    <div id="result">
-        <!-- Results will be displayed here -->
-    </div>
-    <script src="scripts/bondexpcalc.js"></script>
+   <p>The optimized path isn't super useful for large level gaps, but intended for something like level 20-22.</p>
+   <p>Even then, getting large numbers of 3* gifts is hard so, YMMV.</p>
+   </p>
+   <div class="form-group">
+      <div>
+         <label for="start">Starting Bond/Relationship Level:</label>
+         <input type="number" id="start" name="start" min="1" max="100" value=1 required>
+      </div>
+      <div>
+         <label for="end">Desired Bond/Relationship Level:</label>
+         <input type="number" id="end" name="end" min="2" max="100" value=2 required>
+      </div>
+      <div>
+         <input type="button" id="calculate" value="Calculate">
+      </div>
+   </div>
+   <h3> Gift Data Table copied from <a href="https://bluearchive.fandom.com/wiki/Affection#Effect"> Here</a></h3>
+   <h3> Lesson Data Table copied from <a
+         href="https://docs.google.com/spreadsheets/d/1dmB2v7zeR3ja-tjUW92oawNaNGYB1FVtIrE4K8hXE2A/edit#gid=0">Here</a>
+   </h3>
+   <div class="form-group">
+      <table>
+         <tbody>
+            <tr>
+               <td colspan="5"><b><u><a href="https://bluearchive.fandom.com/wiki/Affection#Effect">Gift Reaction
+                           Table</a></u></b></td>
+            </tr>
+            <tr>
+               <td><b>Checking In</b></td>
+               <td><b>Small Effect</b></td>
+               <td><b>Normal Effect</b></td>
+               <td><b>Great Effect</b></td>
+               <td><b>Amazing Effect</b></td>
+            </tr>
+            <tr>
+               <td rowspan="5"><a href="img/Headpat_Icon.webp"><img alt="Headpat Icon" src="img/Headpat_Icon.webp"></a>
+                  <span>Headpat Icon</span>
+                  <br><b>Meh</b>
+                  <br><b>+15 Bond Exp</b>
+               </td>
+               <td><a href="img/Small_Effect.webp"><img alt="Small Effect" src="img/Small_Effect.webp"></a>
+                  <span>Small Effect
+                  </span>
+                  <br><b>Meh</b>
+                  <br>
+               </td>
+               <td><a href="img/Normal_Effect.webp"><img alt="Normal Effect" src="img/Normal_Effect.webp"></a>
+                  <span>Normal Effect
+                  </span>
+                  <br><b>Like</b>
+                  <br>
+               </td>
+               <td><a href="img/Great_Effect.webp"><img alt="Great Effect" src="img/Great_Effect.webp"></a>
+                  <span>Great Effect
+                  </span>
+                  <br><b>Favourite</b>
+               </td>
+               <td><a href="img/Amazing_Effect.webp"><img alt="Amazing Effect" src="img/Amazing_Effect.webp"></a>
+                  <span>Amazing Effect
+                  </span>
+                  <br><b>Loved</b>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><b>Gift Exp (★★)</b></td>
+            </tr>
+            <tr>
+               <td><b>+20 Bond Exp</b></td>
+               <td><b>+40 Bond Exp</b></td>
+               <td><b>+60 Bond Exp</b></td>
+               <td><b>+80 Bond Exp</b></td>
+            </tr>
+            <tr>
+               <td colspan="4"><b>Gift Exp (★★★)</b></td>
+            </tr>
+            <tr>
+               <td><b>+60 Bond Exp</b></td>
+               <td><b>+120 Bond Exp</b></td>
+               <td><b>+180 Bond Exp</b></td>
+               <td><b>+240 Bond Exp</b></td>
+            </tr>
+         </tbody>
+      </table>
+      <table>
+         <tr>
+            <td colspan="5"><b><u><a
+                        href="https://docs.google.com/spreadsheets/d/1dmB2v7zeR3ja-tjUW92oawNaNGYB1FVtIrE4K8hXE2A/edit#gid=0">Lesson/Schedule
+                        Bond XP Table</a></u></b></td>
+         </tr>
+         <tbody>
+            <tr>
+               <td>Rank Academy</td>
+               <td>Level Academy</td>
+               <td>Favor EXP</td>
+               <td>Bonus Favor EXP</td>
+               <td>Bonus Chance</td>
+            </tr>
+            <tr>
+               <td>1</td>
+               <td>1</td>
+               <td>15</td>
+               <td>15</td>
+               <td>10%</td>
+            </tr>
+            <tr>
+               <td>4</td>
+               <td>2</td>
+               <td>15</td>
+               <td>15</td>
+               <td>15%</td>
+            </tr>
+            <tr>
+               <td>7</td>
+               <td>3</td>
+               <td>15</td>
+               <td>15</td>
+               <td>20%</td>
+            </tr>
+            <tr>
+               <td>10</td>
+               <td>4</td>
+               <td>15</td>
+               <td>15</td>
+               <td>25%</td>
+            </tr>
+            <tr>
+               <td>11</td>
+               <td>5</td>
+               <td>20</td>
+               <td>20</td>
+               <td>25%</td>
+            </tr>
+            <tr>
+               <td>12</td>
+               <td>6</td>
+               <td>25</td>
+               <td>25</td>
+               <td>25%</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <div id="result">
+      <!-- Results will be displayed here -->
+   </div>
+   <script src="scripts/bondexpcalc.js"></script>
 </body>
+
 </html>

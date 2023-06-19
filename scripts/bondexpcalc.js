@@ -100,7 +100,7 @@ const bondExpData = [
     { rank: 98, nextLevelExp: 7070, totalExp: 225940 },
     { rank: 99, nextLevelExp: 7215, totalExp: 233010 },
     { rank: 100, nextLevelExp: 7365, totalExp: 240225 }
-  ];
+];
 
 // Bond EXP gifts
 const gifts = {
@@ -170,7 +170,7 @@ function findOptimalGifts(exp) {
     for (let i = exp; i > 0; i = giftAmount[i]) {
         let giftName = giftNames[giftChoice[i]];
         if (!res[giftName]) {
-            res[giftName] = {count: 0, totalXP: 0};
+            res[giftName] = { count: 0, totalXP: 0 };
         }
         res[giftName].count++;
         res[giftName].totalXP += gifts[giftName];
