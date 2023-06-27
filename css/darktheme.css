@@ -19,6 +19,24 @@ select {
     cursor: pointer;
 }
 
+.tab {
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #ccc;
+}
+
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
+}
+
 a {
     color: #eee
 }
