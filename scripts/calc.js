@@ -83,7 +83,9 @@ var levelData = [
     { "level": 82, "exp": 8148 },
     { "level": 83, "exp": 8381 },
     { "level": 84, "exp": 8883 },
-    { "level": 85, "exp": 9460 }
+    { "level": 85, "exp": 9460 },
+    { "level": 86, "exp": 10614 },
+    { "level": 87, "exp": 12922 }
 ];
 
 function calculateXP() {
