@@ -156,13 +156,30 @@ th {
 tr:nth-child(even) {
     background-color: #555;
 }
+
 .gift-item {
     text-align: center;
 }
+
 .gift-item img {
     display: block;
     margin: 0 auto;
 }
+
 .gift-item p {
     margin: 0;
+}
+
+@keyframes highlightResult {
+    from {
+        background-color: #f2f2f2;
+    }
+
+    to {
+        background-color: transparent;
+    }
+}
+
+.highlight {
+    animation: highlightResult 1.5s forwards;
 }

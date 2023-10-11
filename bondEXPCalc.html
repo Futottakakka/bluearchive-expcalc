@@ -27,20 +27,27 @@
    <div class="form-group">
       <div>
          <label for="start">Starting Bond/Relationship Level:</label>
-         <input type="number" id="start" name="start" min="1" max="100" value=1 required>
+         <input id="start" max="100" min="1" name="start" required="" type="number" value="1" />
       </div>
       <div>
          <label for="end">Desired Bond/Relationship Level:</label>
-         <input type="number" id="end" name="end" min="2" max="100" value=2 required>
+         <input id="end" max="100" min="2" name="end" required="" type="number" value="2" />
       </div>
       <div>
-         <input type="button" id="calculate" value="Calculate">
+         <input id="calculate" type="button" value="Calculate" />
+      </div>
+      <div>
+         <label for="exclude3Star">Exclude 3* Gifts:</label>
+         <input id="exclude3Star" name="exclude3Star" type="checkbox" />
       </div>
    </div>
    <h3> Gift Data Table copied from <a href="https://bluearchive.fandom.com/wiki/Affection#Effect"> Here</a></h3>
    <h3> Lesson Data Table copied from <a
          href="https://docs.google.com/spreadsheets/d/1dmB2v7zeR3ja-tjUW92oawNaNGYB1FVtIrE4K8hXE2A/edit#gid=0">Here</a>
    </h3>
+   <div id="result">
+      <!-- Results will be displayed here -->
+   </div>
    <div class="form-group">
       <table>
          <tbody>
@@ -91,7 +98,7 @@
                <td><b>+20 Bond Exp</b></td>
                <td><b>+40 Bond Exp</b></td>
                <td><b>+60 Bond Exp</b></td>
-               
+
                <td><b>+80 Bond Exp</b></td>
             </tr>
             <tr>
@@ -107,7 +114,9 @@
       </table>
       <table>
          <tr>
-            <td colspan="5"><b><u><a href="https://docs.google.com/spreadsheets/d/1dmB2v7zeR3ja-tjUW92oawNaNGYB1FVtIrE4K8hXE2A/edit#gid=0">Lesson/Schedule Bond XP Table</a></u></b></td>
+            <td colspan="5"><b><u><a
+                        href="https://docs.google.com/spreadsheets/d/1dmB2v7zeR3ja-tjUW92oawNaNGYB1FVtIrE4K8hXE2A/edit#gid=0">Lesson/Schedule
+                        Bond XP Table</a></u></b></td>
          </tr>
          <tbody>
             <tr>
@@ -161,9 +170,6 @@
             </tr>
          </tbody>
       </table>
-   </div>
-   <div id="result">
-      <!-- Results will be displayed here -->
    </div>
    <script src="scripts/bondexpcalc.js"></script>
 </body>

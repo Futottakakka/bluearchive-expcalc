@@ -132,8 +132,10 @@ const giftNameToHtml = {
 // Function to calculate the amount of gifts required for a specific EXP
 function calculateGifts(exp) {
     const giftResults = {};
+    const exclude3Star = document.getElementById('exclude3Star').checked;
 
     for (const gift in gifts) {
+        if (exclude3Star && gift.includes('3Star')) continue;
         const quantity = Math.ceil(exp / gifts[gift]);
         const totalXP = quantity * gifts[gift];
         const wastedXP = totalXP > exp ? totalXP - exp : 0;
@@ -148,9 +150,9 @@ function calculateGifts(exp) {
 }
 
 function findOptimalGifts(exp) {
-    let giftValues = Object.values(gifts);
-    let giftNames = Object.keys(gifts);
-
+    const exclude3Star = document.getElementById('exclude3Star').checked;
+    let giftValues = Object.values(gifts).filter((value, index) => !exclude3Star || !Object.keys(gifts)[index].includes('3Star'));
+    let giftNames = Object.keys(gifts).filter(gift => !exclude3Star || !gift.includes('3Star'));
     let dp = new Array(exp + 1).fill(Infinity);
     dp[0] = 0;
     let giftChoice = new Array(exp + 1).fill(0);
@@ -202,6 +204,18 @@ function createTableRows(data) {
         .join('');
 }
 
+
+// Highlight the results
+const resultsSection = document.getElementById('result');
+resultsSection.classList.add('highlight');
+
+// After the animation duration, remove the highlight class
+setTimeout(() => {
+    resultsSection.classList.remove('highlight');
+}, 1500);
+
+// Scroll to the results section
+resultsSection.scrollIntoView({ behavior: 'smooth' });
 document.getElementById('calculate').addEventListener('click', function (e) {
     const startLevel = parseInt(startLevelInput.value);
     const endLevel = parseInt(endLevelInput.value);
