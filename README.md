@@ -5,7 +5,7 @@ Update 10/10/23 - Added level 86 and 87 for JPN, thanks to @Roak for the heads u
 Calculates how much XP you need to get from level X to level Y and, depending on input Exp per day, how many days it will take to get there. 
 Data from: https://github.com/aizawey479/ba-data based on JP but it is the same for Global.
 
-<a href=https://sensei.lol/expcalc.html> https://sensei.lol/expcalc.html </a>
+<a href="https://sensei.lol/expcalc.html"> https://sensei.lol/expcalc.html </a>
 
 # Blue Archive Bond/Relationship Calculator + Optimal Gift Path
 
