@@ -231,21 +231,21 @@ document.getElementById('calculate').addEventListener('click', function (e) {
 
     // Construct the result HTML using a template string
     let resultHtml = `
-        <div id="expNeeded">Total Required EXP: ${totalRequiredExp}</div>
-        <div id="calculationDetails">
-            <table>
-                <tr><th>Gift</th><th>Quantity</th><th>Total XP</th><th>Wasted XP</th></tr>
-                ${createTableRows(giftsRequired)}
-            </table>
-        </div>
-        <div id="optimalGifts">
-            <h3>Optimal Gifts:</h3>
-            <table>
-                <tr><th>Gift</th><th>Quantity</th><th>Total XP</th></tr>
-                ${createTableRows(optimalGifts)}
-            </table>
-        </div>
-    `;
+    <div id="expNeeded">Total Required EXP: ${totalRequiredExp}</div>
+    <div id="calculationDetails">
+        <table>
+            <tr><th>Gift</th><th>Quantity</th><th>Total XP</th><th>Wasted XP</th></tr>
+            ${createTableRows(giftsRequired)}
+        </table>
+    </div>
+    <div id="optimalGifts">
+        <h3>Optimal Gifts:</h3>
+        <table>
+            <tr><th>Gift</th><th>Quantity</th><th>Total XP</th></tr>
+            ${createTableRows(optimalGifts)}
+        </table>
+    </div>
+`;
 
     document.getElementById('result').innerHTML = resultHtml;
 });
