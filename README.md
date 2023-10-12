@@ -2,7 +2,7 @@
 
 # Blue Archive Account Exp Calculator + Estimator
 
-Calculates how much XP you need to get from level X to level Y and, depending on input Exp per day, how many days it will take to get there. 
+Calculates how much Exp you need to get from level X to level Y and, depending on input Exp per day, how many days it will take to get there. 
 Data from: https://github.com/aizawey479/ba-data based on JP but it is the same for Global.
 
 <a href="https://sensei.lol/expcalc.html"> https://sensei.lol/expcalc.html </a>
