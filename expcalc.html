@@ -29,13 +29,13 @@
             <input type="number" id="currentLevelExp" name="currentLevelExp" min="0" max="9459" value="0">
          </div>
          <div>
-            <label for="targetLevel">Target Level (max 85GLB/87JP):</label>
-            <input type="number" id="targetLevel" name="targetLevel" max="87" min="2" value="85">
+            <label for="targetLevel">Target Level (max 87GLB/90JP):</label>
+            <input type="number" id="targetLevel" name="targetLevel" max="90" min="2" value="85">
          </div>
       </div>
       <div class="form-group">
          <div>
-            <label for="cafeRank">Cafe Rank:</label>
+            <label for="cafeRank">Cafe Rank (max 8GLB/9JP):</label>
             <select id="cafeRank" name="cafeRank" onchange="updateExpPerDay()">
                <option value="90">1</option>
                <option value="150">2</option>
@@ -44,8 +44,8 @@
                <option value="390">5</option>
                <option value="460">6</option>
                <option value="530">7</option>
-               <option value="600">8 (current max)</option>
-               <option value="670">9</option>
+               <option value="600">8 (GLB max)</option>
+               <option value="670">9 (JP max)</option>
                <option value="740">10</option>
             </select>
          </div>
@@ -120,7 +120,7 @@
          + 4x TC Purchases (360AP) OR 3x Pyro (360AP) = <b>810 AP/Day</b> </br>
          + 4x TC Purchases AND 3x Pyro Refresh (360*2) = <b>1170 AP/Day</b></br>
          + Cafe Bonus (select current Cafe Level from dropdown, current max is 7 for GLB+JP)</b></br>
-         <b>Please note that this will only provide a rough esitmate, as it does not include bonus XP from events/gifts
+         <b>Please note that this will only provide a rough estimate, as it does not include bonus XP from events/gifts
             and
             it doesn't include the AP refresh that occurs upon leveling up.</br>
             I would +/- 5-10 days from the estimate.</b>
