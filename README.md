@@ -8,6 +8,7 @@ Data from: https://github.com/aizawey479/ba-data based on JP but it is the same 
 <a href="https://sensei.lol/expcalc.html"> https://sensei.lol/expcalc.html </a>
 
 Update 02/05/24 - Added levels 88-90 for JP
+Update 07/26/24 - Added levels 90 for GLB
 
 # Blue Archive Bond/Relationship Calculator + Optimal Gift Path
 
