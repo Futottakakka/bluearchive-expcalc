@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Archive Sensei & Student EXP Calculator</title>
+  <meta name="description" content="Calculate Blue Archive Sensei Account EXP, daily AP generation, time to level 90, and Student Bond / Relationship EXP with optimal gift paths.">
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="img/site.webmanifest">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Top Header -->
+    <header class="header">
+      <div class="brand-wrapper">
+        <div class="brand-icon">BA</div>
+        <div class="brand-info">
+          <h1>Blue Archive EXP Calculator</h1>
+          <p>Sensei Leveling Estimator & Student Bond Gift Planner</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <span>🌙</span> Dark Mode
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" role="tablist">
+      <button class="tab-btn active-schale" data-tab="sensei" role="tab" aria-selected="true">
+        <span>⭐</span> Sensei Account EXP
+      </button>
+      <button class="tab-btn" data-tab="bond" role="tab" aria-selected="false">
+        <span>❤️</span> Student Bond EXP
+      </button>
+      <button class="tab-btn" data-tab="reference" role="tab" aria-selected="false">
+        <span>📖</span> Reference Tables
+      </button>
+    </nav>
+
+    <!-- TAB 1: SENSEI ACCOUNT EXP -->
+    <section id="tab-sensei" class="tab-panel active" role="tabpanel">
+      <div class="grid-layout">
+        
+        <!-- Left: Form Controls -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title schale">
+              <span>⭐</span> Level & Daily AP Setup
+            </h2>
+            <span class="preset-chip">Cap: Lv 90</span>
+          </div>
+
+          <!-- Section: Level Goals -->
+          <div class="form-section">
+            <div class="form-section-title">Sensei Level Goals</div>
+            <div class="form-grid">
+              <div class="input-group">
+                <label class="input-label" for="currentLevel">Current Level</label>
+                <input type="number" id="currentLevel" class="input-field" min="1" max="89" value="1">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="currentLevelExp">Current EXP in Level</label>
+                <input type="number" id="currentLevelExp" class="input-field" min="0" value="0">
+                <span class="input-hint" id="curExpMaxHint">(0 to 7)</span>
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="targetLevel">Target Level</label>
+                <input type="number" id="targetLevel" class="input-field" min="2" max="90" value="90">
+              </div>
+            </div>
+            
+            <div class="preset-group">
+              <span class="input-hint" style="align-self: center; margin-right: 0.25rem;">Presets:</span>
+              <button type="button" class="preset-chip" data-sensei-preset="plus1">+1 Level</button>
+              <button type="button" class="preset-chip" data-sensei-preset="85">Target Lv 85</button>
+              <button type="button" class="preset-chip" data-sensei-preset="90">Target Lv 90 (Cap)</button>
+            </div>
+          </div>
+
+          <!-- Section: Daily AP Sources -->
+          <div class="form-section" style="margin-top: 1.5rem;">
+            <div class="form-section-title">Daily AP Generation Sources</div>
+            
+            <div class="form-grid">
+              <div class="input-group">
+                <label class="input-label" for="cafeRank">Cafe Rank (Max 10)</label>
+                <select id="cafeRank" class="select-field">
+                  <option value="90">Rank 1 (+90 AP/day)</option>
+                  <option value="150">Rank 2 (+150 AP/day)</option>
+                  <option value="220">Rank 3 (+220 AP/day)</option>
+                  <option value="300">Rank 4 (+300 AP/day)</option>
+                  <option value="390">Rank 5 (+390 AP/day)</option>
+                  <option value="460">Rank 6 (+460 AP/day)</option>
+                  <option value="530">Rank 7 (+530 AP/day)</option>
+                  <option value="600">Rank 8 (+600 AP/day)</option>
+                  <option value="670">Rank 9 (+670 AP/day)</option>
+                  <option value="740" selected>Rank 10 (+740 AP/day - Max)</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="TCCoinAP">Tactical Challenge (PvP) Purchases</label>
+                <select id="TCCoinAP" class="select-field">
+                  <option value="0">0 purchases (0 AP)</option>
+                  <option value="1">1 refresh (90 AP / 45 coins)</option>
+                  <option value="2">2 refreshes (180 AP / 100 coins)</option>
+                  <option value="3">3 refreshes (270 AP / 155 coins)</option>
+                  <option value="4" selected>4 refreshes (360 AP / 210 coins)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="input-group">
+                <label class="input-label" for="numApRefreshes">Pyroxene AP Refills (120 AP/ea)</label>
+                <select id="numApRefreshes" class="select-field">
+                  <option value="0" selected>0 refills (0 AP)</option>
+                  <option value="1">1 refill (120 AP - 30 Pyro)</option>
+                  <option value="2">2 refills (240 AP - 60 Pyro)</option>
+                  <option value="3">3 refills (360 AP - 90 Pyro)</option>
+                  <option value="4">4 refills (480 AP - 150 Pyro)</option>
+                  <option value="5">5 refills (600 AP - 210 Pyro)</option>
+                  <option value="6">6 refills (720 AP - 270 Pyro)</option>
+                  <option value="7">7 refills (840 AP - 370 Pyro)</option>
+                  <option value="8">8 refills (960 AP - 470 Pyro)</option>
+                  <option value="9">9 refills (1080 AP - 570 Pyro)</option>
+                  <option value="10">10 refills (1200 AP - 720 Pyro)</option>
+                  <option value="11">11 refills (1320 AP - 870 Pyro)</option>
+                  <option value="12">12 refills (1440 AP - 1020 Pyro)</option>
+                  <option value="13">13 refills (1560 AP - 1220 Pyro)</option>
+                  <option value="14">14 refills (1680 AP - 1420 Pyro)</option>
+                  <option value="15">15 refills (1800 AP - 1620 Pyro)</option>
+                  <option value="16">16 refills (1920 AP - 1920 Pyro)</option>
+                  <option value="17">17 refills (2040 AP - 2220 Pyro)</option>
+                  <option value="18">18 refills (2160 AP - 2520 Pyro)</option>
+                  <option value="19">19 refills (2280 AP - 2820 Pyro)</option>
+                  <option value="20">20 refills (2400 AP - 3120 Pyro)</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="customApExtra">Extra AP (Packs / Events)</label>
+                <input type="number" id="customApExtra" class="input-field" min="0" max="5000" value="0" placeholder="0">
+              </div>
+            </div>
+
+            <div class="info-box">
+              <strong>Base AP includes 450 AP/day:</strong> 240 natural regeneration (1 AP / 6 min) + 150 daily mission reward + 50 weekly mission average (350/7) + 10 club check-in.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Results Panel -->
+        <div class="results-container">
+          
+          <div class="hero-stat-card schale-hero">
+            <div class="hero-stat-title">Total EXP Required</div>
+            <div class="hero-stat-value schale" id="senseiTotalExp">0</div>
+            <div class="hero-stat-subtext" id="senseiFinishDate">Calculating estimate...</div>
+          </div>
+
+          <div class="stat-pills-row">
+            <div class="stat-pill">
+              <div class="stat-pill-label">Estimated Days</div>
+              <div class="stat-pill-value" id="senseiDays">0 Days</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-pill-label">Weeks</div>
+              <div class="stat-pill-value" id="senseiWeeks">0 wks</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-pill-label">Months</div>
+              <div class="stat-pill-value" id="senseiMonths">~0 mo</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" style="margin-bottom: 0.5rem; padding-bottom: 0.5rem;">
+              <h3 class="card-title" style="font-size: 0.95rem;">Daily AP Breakdown</h3>
+              <span class="preset-chip" id="senseiDailyAp">1,550 AP/day</span>
+            </div>
+            <div id="senseiApBreakdown" class="breakdown-list"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 2: STUDENT BOND EXP -->
+    <section id="tab-bond" class="tab-panel bond-mode" role="tabpanel">
+      <div class="grid-layout">
+        
+        <!-- Left: Form Controls -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title bond">
+              <span>❤️</span> Relationship Goals
+            </h2>
+            <span class="preset-chip">Cap: Rank 100</span>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Bond / Affection Ranks</div>
+            <div class="form-grid">
+              <div class="input-group">
+                <label class="input-label" for="startRank">Starting Rank</label>
+                <input type="number" id="startRank" class="input-field" min="1" max="99" value="1">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="targetRank">Desired Rank</label>
+                <input type="number" id="targetRank" class="input-field" min="2" max="100" value="20">
+              </div>
+            </div>
+
+            <div class="preset-group">
+              <span class="input-hint" style="align-self: center; margin-right: 0.25rem;">Milestones:</span>
+              <button type="button" class="preset-chip bond-chip" data-bond-preset="20">Rank 20 (Unique Item T1 / L2D)</button>
+              <button type="button" class="preset-chip bond-chip" data-bond-preset="25">Rank 25 (Unique Item T2)</button>
+              <button type="button" class="preset-chip bond-chip" data-bond-preset="50">Rank 50 (Stat Cap)</button>
+              <button type="button" class="preset-chip bond-chip" data-bond-preset="100">Rank 100 (Max)</button>
+            </div>
+          </div>
+
+          <div class="form-section" style="margin-top: 1.5rem;">
+            <div class="form-section-title">Gift Filter Options</div>
+            
+            <label class="toggle-wrapper">
+              <input type="checkbox" id="exclude3Star">
+              <span class="toggle-label">Exclude 3★ (Purple) Gifts</span>
+            </label>
+
+            <label class="toggle-wrapper">
+              <input type="checkbox" id="excludeCheckIn">
+              <span class="toggle-label">Exclude Cafe Check-Ins (+15 EXP)</span>
+            </label>
+
+            <div class="info-box bond-info">
+              <strong>Gift Reaction Mechanics:</strong> 2★ gifts give +20 (Normal), +40 (Liked), +60 (Favorite), or +80 (Beloved). 3★ gifts guarantee at least Liked (+120), up to +240 (Beloved). Cafe headpats provide flat +15 EXP.
+            </div>
+          </div>
+
+          <!-- Optimal Gift Combination -->
+          <div class="form-section" style="margin-top: 1.5rem;">
+            <div class="form-section-title">Optimal Gift Combination</div>
+            <div id="optimalGiftsContainer"></div>
+          </div>
+        </div>
+
+        <!-- Right: Results Panel -->
+        <div class="results-container">
+          
+          <div class="hero-stat-card bond-hero">
+            <div class="hero-stat-title">Bond EXP Required</div>
+            <div class="hero-stat-value bond" id="bondTotalExp">0</div>
+            <div class="hero-stat-subtext" id="bondHeroSubtext">Rank 1 → Rank 20</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" style="margin-bottom: 0.5rem; padding-bottom: 0.5rem;">
+              <h3 class="card-title" style="font-size: 0.95rem;">Single-Type Gift Requirements</h3>
+            </div>
+            <div id="giftCardsGrid" class="gift-grid"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 3: REFERENCE TABLES -->
+    <section id="tab-reference" class="tab-panel" role="tabpanel">
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <h2 class="card-title"><span>📊</span> In-Game Reference Tables</h2>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
+          Reference data for Pyroxene AP refills, Cafe generation scaling, and Lesson / Schedule Bond EXP chances.
+        </p>
+
+        <!-- Accordion 1: Pyro AP Table -->
+        <div class="accordion open">
+          <div class="accordion-header">
+            <span>🔥 Pyroxene AP Refresh Price Table</span>
+            <span class="accordion-arrow">▼</span>
+          </div>
+          <div class="accordion-body">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Refill #</th>
+                    <th>Cost (Pyro)</th>
+                    <th>Cumulative Pyro</th>
+                    <th>AP Gained</th>
+                    <th>Cumulative AP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>30</td><td>30</td><td>+120</td><td>120</td></tr>
+                  <tr><td>2</td><td>30</td><td>60</td><td>+120</td><td>240</td></tr>
+                  <tr><td>3</td><td>30</td><td>90</td><td>+120</td><td>360</td></tr>
+                  <tr><td>4</td><td>60</td><td>150</td><td>+120</td><td>480</td></tr>
+                  <tr><td>5</td><td>60</td><td>210</td><td>+120</td><td>600</td></tr>
+                  <tr><td>6</td><td>60</td><td>270</td><td>+120</td><td>720</td></tr>
+                  <tr><td>7</td><td>100</td><td>370</td><td>+120</td><td>840</td></tr>
+                  <tr><td>8</td><td>100</td><td>470</td><td>+120</td><td>960</td></tr>
+                  <tr><td>9</td><td>100</td><td>570</td><td>+120</td><td>1,080</td></tr>
+                  <tr><td>10</td><td>150</td><td>720</td><td>+120</td><td>1,200</td></tr>
+                  <tr><td>11</td><td>150</td><td>870</td><td>+120</td><td>1,320</td></tr>
+                  <tr><td>12</td><td>150</td><td>1,020</td><td>+120</td><td>1,440</td></tr>
+                  <tr><td>13</td><td>200</td><td>1,220</td><td>+120</td><td>1,560</td></tr>
+                  <tr><td>14</td><td>200</td><td>1,420</td><td>+120</td><td>1,680</td></tr>
+                  <tr><td>15</td><td>200</td><td>1,620</td><td>+120</td><td>1,800</td></tr>
+                  <tr><td>16</td><td>300</td><td>1,920</td><td>+120</td><td>1,920</td></tr>
+                  <tr><td>17</td><td>300</td><td>2,220</td><td>+120</td><td>2,040</td></tr>
+                  <tr><td>18</td><td>300</td><td>2,520</td><td>+120</td><td>2,160</td></tr>
+                  <tr><td>19</td><td>300</td><td>2,820</td><td>+120</td><td>2,280</td></tr>
+                  <tr><td>20</td><td>300</td><td>3,120</td><td>+120</td><td>2,400</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion 2: Lesson / Schedule Table -->
+        <div class="accordion" style="margin-top: 1rem;">
+          <div class="accordion-header">
+            <span>🏫 Lesson / Schedule Bond EXP Table</span>
+            <span class="accordion-arrow">▼</span>
+          </div>
+          <div class="accordion-body">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Academy Rank</th>
+                    <th>Academy Level</th>
+                    <th>Base Favor EXP</th>
+                    <th>Bonus Favor EXP</th>
+                    <th>Bonus Chance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>1</td><td>15</td><td>+15</td><td>10%</td></tr>
+                  <tr><td>4</td><td>2</td><td>15</td><td>+15</td><td>15%</td></tr>
+                  <tr><td>7</td><td>3</td><td>15</td><td>+15</td><td>20%</td></tr>
+                  <tr><td>10</td><td>4</td><td>15</td><td>+15</td><td>25%</td></tr>
+                  <tr><td>11</td><td>5</td><td>20</td><td>+20</td><td>25%</td></tr>
+                  <tr><td>12</td><td>6</td><td>25</td><td>+25</td><td>25%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="https://github.com/Futottakakka/bluearchive-expcalc" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://github.com/aizawey479/ba-data" target="_blank" rel="noopener">EXP Data Source</a>
+        <a href="https://bluearchive.wikiru.jp/?%E7%B5%8C%E9%A8%93%E5%80%A4%E8%A1%A8" target="_blank" rel="noopener">Wikiru Reference</a>
+        <a href="https://bluearchive.fandom.com/wiki/Affection" target="_blank" rel="noopener">Affection Reference</a>
+      </div>
+      <p>Blue Archive Sensei & Student Bond Calculator • Created by Futotta-kakka</p>
+    </footer>
+
+  </div>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
